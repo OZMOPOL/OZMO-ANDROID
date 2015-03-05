@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0295e4a1f0fc1b10599e9182272249e7b12cd1a2.jar" />
+    </item>
+    <item
+        jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-bb24f5ef2eb47f166c2aa207012df093467cd1fd.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6e5aef773d5a4c7a255fd62e7895bc92fc1a0b52.jar" />
+    </item>
+    <item
+        jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
+        <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-efba9db9ccdd1c134e4517771b22795a5ea31368.jar" />
+    </item>
+    <item
+        jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="66d8c086a078286a9597e4aa380a85534b22d36f">
+        <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-59908ac18e326a57ec06b85cd6ea4f62ae557f7f.jar" />
+    </item>
+    <item
+        jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-ae2693cf7fb53882006fc4d1b735beceb2387fff.jar" />
+    </item>
+
+</items>

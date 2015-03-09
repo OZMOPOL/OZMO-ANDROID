@@ -15,19 +15,19 @@ public class MainActivity extends MaterialNavigationDrawer {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        this.setDrawerBackgroundColor(Color.parseColor("#F2E8D7"));
+        //this.setDrawerBackgroundColor(Color.parseColor("#F2E8D7"));
         // add accounts
         MaterialAccount account = new MaterialAccount(this.getResources(),"Amin Dorostanian","amin@correctan.com",R.drawable.photo, R.drawable.bamboo);
         this.addAccount(account);
-        this.addSection(newSection("Front Page", new FragmentIndex()));
-        this.addDivisor();
-        this.addSection(newSection("Rooms",new FragmentIndex()).setSectionColor(Color.parseColor("#000000")));
-        this.addSection(newSection("Section 3",R.drawable.ic_mic_white_24dp,new FragmentButton()).setSectionColor(Color.parseColor("#9c27b0")));
-        this.addSection(newSection("Section",R.drawable.ic_hotel_grey600_24dp,new FragmentButton()).setSectionColor(Color.parseColor("#03a9f4")));
-        // create bottom section
-        this.addBottomSection(newSection("Bottom Section",R.drawable.ic_settings_black_24dp,new Intent(this,Settings.class)));
-        // add pattern
-        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
+        this.addSection(newSection("Front Page", new FragmentFrontPage()));
+//        this.addDivisor();
+//        this.addSection(newSection("Rooms",new FrontPageFragment()).setSectionColor(Color.parseColor("#000000")));
+//        this.addSection(newSection("Section 3",R.drawable.ic_mic_white_24dp,new FragmentButton()).setSectionColor(Color.parseColor("#9c27b0")));
+//        this.addSection(newSection("Section",R.drawable.ic_hotel_grey600_24dp,new FragmentButton()).setSectionColor(Color.parseColor("#03a9f4")));
+//        // create bottom section
+//        this.addBottomSection(newSection("Bottom Section",R.drawable.ic_settings_black_24dp,new Intent(this,Settings.class)));
+//        // add pattern
+//        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
     }
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {

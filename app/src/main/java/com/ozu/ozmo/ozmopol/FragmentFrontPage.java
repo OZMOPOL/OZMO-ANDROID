@@ -10,18 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.view.CardViewNative;
+
 
 /**
  * Created by neokree on 24/11/14.
  */
-public class FragmentIndex extends Fragment {
+public class FragmentFrontPage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView text = new TextView(this.getActivity());
-        text.setText("TEST Section");
-        text.setGravity(Gravity.CENTER);
-        return text;
+        //Create a Card
+        //Card card =(Card) getView().findViewById(R.id.carddemo);
+
+
+        return inflater.inflate(R.layout.my_fragment, container, false);
+
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ozu.ozmo.ozmopol;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -9,10 +10,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.dexafree.materialList.cards.SmallImageCard;
-import com.dexafree.materialList.view.MaterialListView;
+import com.etsy.android.grid.StaggeredGridView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,26 +27,23 @@ public class FragmentFrontPage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
-    return inflater.inflate(R.layout.fragment_front_page, container, false);
-
-
-
+        return inflater.inflate(R.layout.fragment_front_page, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MaterialListView mListView = (MaterialListView) getView().findViewById(R.id.material_listview);
+        List<String> myCards=new ArrayList<String>();
 
-        SmallImageCard card = new SmallImageCard(getActivity());
-        card.setDescription("HEY");
-        card.setTitle("Title");
-        card.setDrawable(R.drawable.ic_launcher);
+        myCards.add("HEy");
 
-        mListView.add(card);
+
+        PostsAdapter pAdapter=new PostsAdapter(getActivity(),myCards);
+
+        StaggeredGridView gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
+
+        gridView.setAdapter(pAdapter);
 
     }
 }

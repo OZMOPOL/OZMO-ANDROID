@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-core/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d6467247ced8a5d51f8ff73a6595d517eddba6">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-f35f30cde75ddf324a24b3f564a34d656c9a719d.jar" />
-    </item>
-    <item
         jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -21,13 +14,6 @@
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
         <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-bb24f5ef2eb47f166c2aa207012df093467cd1fd.jar" />
-    </item>
-    <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-recyclerview/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="15d2052aed6aa62f341d22e1ba6177697c7dc552">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-33b9814cc26edd8666910d65380befedb02b7a75.jar" />
     </item>
     <item
         jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.2/classes.jar"
@@ -51,13 +37,6 @@
         <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-2534067c2d6f3a504043dd5ba02e860400d1bdaf.jar" />
     </item>
     <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-extra-dragdrop/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c2ccd61dc70f7b1dc968c73626f90a61eb542905">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-df26ae255471464f7d46c085b7942cc6a484c9f8.jar" />
-    </item>
-    <item
         jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -70,6 +49,20 @@
         revision="21.1.2"
         sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
         <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-410d84577c4058b545f880757161ece0bd7b2e15.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.4.0/f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2/picasso-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f36d2d4e3a36b3259aaf9d004d29b4cdc6c1bfb2">
+        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/picasso-2.4.0-669dbf19eb0b7b4f824724a5bc95628bf4bb1ff0.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.squareup/otto/1.3.5/7941cd2c2c8ec006800d75c35f8a9dacf892ab93/otto-1.3.5.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7941cd2c2c8ec006800d75c35f8a9dacf892ab93">
+        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/otto-1.3.5-c65ad9ad1f626e1646d55a258d22fe67fdc9bbb0.jar" />
     </item>
     <item
         jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/classes.jar"
@@ -100,11 +93,11 @@
         <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-cd47a2acd3bde8c60b809fcdbe4c54fe62543e4b.jar" />
     </item>
     <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/classes.jar"
+        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.github.dexafree/materiallist/2.3.2/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="8218789edb56bdcfff7da48e892b37460fc707e2">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-14d6ce7a34520a3a7cbce1e5f029bb4470eb8a33.jar" />
+        sha1="b90b1b8016379a1adaaef9945e2d9f752b4f0ebe">
+        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-d3a2ad9d91244c4d168093237d6c141956934147.jar" />
     </item>
     <item
         jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.nhaarman.listviewanimations/lib-manipulation/3.1.0/63737e512fcd9e0ebe9bcd0bb375c2dded74116f/lib-manipulation-3.1.0.jar"
@@ -114,18 +107,11 @@
         <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/lib-manipulation-3.1.0-9e2af35e56dc3114858386c66fabd24422abdaad.jar" />
     </item>
     <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.0/classes.jar"
+        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="7d2525cba8ed61fff102977caed964fc22061e34">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-8aa53b04826873a5efeee9aedb6b3504e017ef81.jar" />
-    </item>
-    <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-extra-staggeredgrid/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="53c7b3252488ffcd664c6889d8d536a09ae3ad80">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-798057df816911d1977ab4a0799fae89ef1f0a73.jar" />
+        sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
+        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-fe1b2a515c32239a1abe77c9ca3ad1aa7714944f.jar" />
     </item>
     <item
         jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.nhaarman.listviewanimations/lib-core/3.1.0/f3f9629b068554d8513a2aaf34418171bf430851/lib-core-3.1.0.jar"
@@ -182,13 +168,6 @@
         revision="21.1.2"
         sha1="53c7b3252488ffcd664c6889d8d536a09ae3ad80">
         <dex dex="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-a6b4164326c1edceee66f0831d29c47903109f23.jar" />
-    </item>
-    <item
-        jar="/Users/amind/Documents/OZMOPOL/app/build/intermediates/exploded-aar/com.github.gabrielemariotti.cards/cardslib-cards/2.0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d851788f6c23d14aa5fa8fbfd6d1b17725ad44c5">
-        <dex dex="/Users/amind/Documents/OZMOPOL/app/build/intermediates/pre-dexed/debug/classes-f127b2f2640850d98e6809db4854b89df760a0dd.jar" />
     </item>
     <item
         jar="/Users/amind/AndroidStudioProjects/OZMOPOL/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"

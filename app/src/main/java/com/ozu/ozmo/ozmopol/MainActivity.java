@@ -17,7 +17,7 @@ public class MainActivity extends MaterialNavigationDrawer {
     public void init(Bundle savedInstanceState) {
         this.setDrawerBackgroundColor(Color.parseColor("#F2E8D7"));
         // add accounts
-        MaterialAccount account = new MaterialAccount(this.getResources(),"NeoKree","neokree@gmail.com",R.drawable.photo, R.drawable.bamboo);
+        MaterialAccount account = new MaterialAccount(this.getResources(),"Amin Dorostanian","amin@correctan.com",R.drawable.photo, R.drawable.bamboo);
         this.addAccount(account);
         this.addSection(newSection("Front Page", new FragmentIndex()));
         this.addDivisor();

@@ -37,7 +37,10 @@ public class FragmentFrontPage extends Fragment {
         List<String> myCards=new ArrayList<String>();
 
         myCards.add("HEy");
-
+        myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
 
         PostsAdapter pAdapter=new PostsAdapter(getActivity(),myCards);
 

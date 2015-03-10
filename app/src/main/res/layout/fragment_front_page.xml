@@ -10,7 +10,8 @@
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:item_margin="8dp"
-        app:column_count="2" />
+        app:item_margin="3dp"
+        app:column_count_portrait="1"
+        app:column_count_landscape="2"/>
 
 </FrameLayout>

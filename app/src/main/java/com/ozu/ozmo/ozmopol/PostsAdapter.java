@@ -2,14 +2,11 @@ package com.ozu.ozmo.ozmopol;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -50,9 +47,9 @@ public class PostsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         PostCardViewHolder vh;
         if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.list_item_sample, parent, false);
+            convertView = mLayoutInflater.inflate(R.layout.post_item, parent, false);
             vh = new PostCardViewHolder();
-            vh.tv = (TextView) convertView.findViewById(R.id.tv_test);
+            //vh.tv = (TextView) convertView.findViewById(R.id.tv_test);
             convertView.setTag(vh);
         } else {
             vh = (PostCardViewHolder) convertView.getTag();
@@ -60,7 +57,7 @@ public class PostsAdapter extends BaseAdapter {
 
         double positionHeight = 50;
 
-        vh.tv.setText("WOOOSSS UP ?");
+        //vh.tv.setText("WOOOSSS UP ?");
 
         return convertView;
     }

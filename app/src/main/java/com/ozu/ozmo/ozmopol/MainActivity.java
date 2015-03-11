@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
+import it.neokree.materialnavigationdrawer.elements.MaterialSubheader;
+import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
+
 
 public class MainActivity extends MaterialNavigationDrawer {
 
@@ -17,9 +22,54 @@ public class MainActivity extends MaterialNavigationDrawer {
     public void init(Bundle savedInstanceState) {
         //this.setDrawerBackgroundColor(Color.parseColor("#F2E8D7"));
         // add accounts
-        MaterialAccount account = new MaterialAccount(this.getResources(),"Amin Dorostanian","amin@correctan.com",R.drawable.photo, R.drawable.bamboo);
+        MaterialAccount account = new MaterialAccount(this.getResources(),"Amin Dorostanian","amin@correctan.com",R.drawable.amind, R.drawable.profile_background);
         this.addAccount(account);
-        this.addSection(newSection("Front Page", new FragmentFrontPage()));
+
+        MaterialSection section_notifications=newSection("Notifications", new FragmentFrontPage());
+        //  section_front_page.setSectionColor(Color.parseColor("#000000"));
+        // section_front_page.setPressingColor(Color.parseColor("#c0c0c0"));
+
+        this.addSection(section_notifications);
+
+
+        MaterialSection section_front_page=newSection("Front Page", new FragmentFrontPage());
+      //  section_front_page.setSectionColor(Color.parseColor("#000000"));
+      // section_front_page.setPressingColor(Color.parseColor("#c0c0c0"));
+
+        this.addSection(section_front_page);
+
+
+        MaterialSection section_rooms=newSection("Rooms",new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection materialSection) {
+            }
+        });
+      //  section_rooms.setSectionColor(Color.parseColor("#000000"));
+      //  section_rooms.setPressingColor(Color.parseColor("#c0c0c0"));
+       // section_rooms.setColorSelected(Color.parseColor("#000000"));
+        this.addSection(section_rooms);
+
+        MaterialSection section_settings=newSection("Settings",new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection materialSection) {
+
+            }
+        });
+       // section_notifications.setSectionColor(Color.parseColor("#000000"));
+        //section_notifications.setPressingColor(Color.parseColor("#c0c0c0"));
+        this.addSection(section_settings);
+
+
+        this.addBottomSection(newSection("Logout",new MaterialSectionListener() {
+            @Override
+            public void onClick(MaterialSection materialSection) {
+
+            }
+        }));
+
+        disableLearningPattern();
+        //addMultiPaneSupport();
+       // this.setDrawerBackgroundColor(Color.parseColor("#F7F5E4"));
 //        this.addDivisor();
 //        this.addSection(newSection("Rooms",new FrontPageFragment()).setSectionColor(Color.parseColor("#000000")));
 //        this.addSection(newSection("Section 3",R.drawable.ic_mic_white_24dp,new FragmentButton()).setSectionColor(Color.parseColor("#9c27b0")));
@@ -29,32 +79,5 @@ public class MainActivity extends MaterialNavigationDrawer {
 //        // add pattern
 //        this.setBackPattern(MaterialNavigationDrawer.BACKPATTERN_BACK_TO_FIRST);
     }
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//    }
-//
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+
 }

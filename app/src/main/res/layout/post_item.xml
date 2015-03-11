@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10px"
+        card_view:cardBackgroundColor="@color/whiteColor"
+        card_view:cardCornerRadius="3dp"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:id="@+id/header_view">
+
+            <LinearLayout
+                android:id="@+id/votes_buttons"
+                android:layout_width="50dp"
+                android:layout_weight="0"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitCenter"
+                    android:background="@null"
+                    android:src="@drawable/ic_arrow_up"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:padding="2dp"
+                    android:textSize="10dp"
+                    android:textColor="@color/title_color"
+                    android:gravity="center"
+                    android:text="319"/>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:scaleType="fitCenter"
+                    android:background="@null"
+                    android:src="@drawable/ic_arrow_down"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/title_container"
+                android:layout_width="fill_parent"
+                android:layout_weight="1"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    />
+                <TextView
+                    android:id="@+id/tv_post_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:textColor="@color/title_color"
+                    android:text="Post Title comes here for showing (it should have limited characters?"/>
+                <TextView
+                    android:id="@+id/tv_post_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:lines="4"
+                    android:textColor="@color/content_abstract_color"
+                    android:text="@string/lorem_ipsum"/>
+
+
+
+                </LinearLayout>
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:paddingLeft="5dp"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:layout_weight="0"
+                android:src="@drawable/ic_right"/>
+
+            </LinearLayout>
+
+
+
+
+
+    </android.support.v7.widget.CardView>

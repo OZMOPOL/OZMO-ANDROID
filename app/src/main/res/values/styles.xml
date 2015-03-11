@@ -7,6 +7,16 @@
     <style name="MyNavigationDrawerTheme" parent="MaterialNavigationDrawerTheme">
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
-        <item name="colorAccent">#000000</item>
+        <item name="colorAccent">#FFFFFF</item>
+
     </style>
+    <style name="MySectionTheme" >
+        <item name="sectionColorIcon">#00F</item>
+        <item name="sectionColorText">#00F</item>
+        <item name="sectionColorNotification">#00F</item>
+        <item name="sectionBackgroundColorPressed">#160000FF</item>
+        <item name="sectionBackgroundColorSelected">#0A0000FF</item>
+        <item name="sectionBackgroundColor">#000000FF</item>
+    </style>
+
 </resources>

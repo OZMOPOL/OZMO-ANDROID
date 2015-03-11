@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="cardview_initial_background">#71C3DE</color>
+    <color name="cardview_background">#F7F5E4</color>
     <color name="whiteColor">#FFFFFF</color>
+    <color name="title_color">#000000</color>
+    <color name="line_color">#088DA5</color>
+    <color name="content_abstract_color">#666666</color>
 </resources>

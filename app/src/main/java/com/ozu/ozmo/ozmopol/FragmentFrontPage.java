@@ -41,11 +41,16 @@ public class FragmentFrontPage extends Fragment {
         myCards.add("HEy");
         myCards.add("HEy");
         myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
+        myCards.add("HEy");
 
         PostsAdapter pAdapter=new PostsAdapter(getActivity(),myCards);
 
         StaggeredGridView gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
-
         gridView.setAdapter(pAdapter);
 
     }

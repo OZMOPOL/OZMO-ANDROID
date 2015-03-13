@@ -1,18 +1,10 @@
 package com.ozu.ozmo.ozmopol;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
 import it.neokree.materialnavigationdrawer.elements.MaterialSection;
-import it.neokree.materialnavigationdrawer.elements.MaterialSubheader;
 import it.neokree.materialnavigationdrawer.elements.listeners.MaterialSectionListener;
 
 
@@ -39,11 +31,7 @@ public class MainActivity extends MaterialNavigationDrawer {
         this.addSection(section_front_page);
 
 
-        MaterialSection section_rooms=newSection("Rooms",new MaterialSectionListener() {
-            @Override
-            public void onClick(MaterialSection materialSection) {
-            }
-        });
+        MaterialSection section_rooms=newSection("Rooms",new FragmentRooms());
       //  section_rooms.setSectionColor(Color.parseColor("#000000"));
       //  section_rooms.setPressingColor(Color.parseColor("#c0c0c0"));
        // section_rooms.setColorSelected(Color.parseColor("#000000"));

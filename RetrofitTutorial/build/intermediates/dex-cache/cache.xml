@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\da0517\.gradle\caches\modules-2\files-2.1\org.immutables\gson\2.0-rc\c2632978e1348b5aa9de907df21f128c5e82a8\gson-2.0-rc.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="00c2632978e1348b5aa9de907df21f128c5e82a8">
+        <dex dex="C:\Users\da0517\AndroidStudioProjects\RetrofitTutorial\app\build\intermediates\pre-dexed\debug\gson-2.0-rc-e5c6d442dee3599abfbcc82842b4b4c793db6898.jar" />
+    </item>
+    <item
+        jar="C:\Users\da0517\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="C:\Users\da0517\AndroidStudioProjects\RetrofitTutorial\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-93b743b013fccbc29eb85eac4aa7911e4e2ecd37.jar" />
+    </item>
+    <item
+        jar="C:\Users\da0517\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.9.0\a681c044244d9fc375198588297a39ba78028423\retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="C:\Users\da0517\AndroidStudioProjects\RetrofitTutorial\app\build\intermediates\pre-dexed\debug\retrofit-1.9.0-8817d499da301a4e405731968ac2234415bd90f0.jar" />
+    </item>
+    <item
+        jar="C:\Users\da0517\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\da0517\AndroidStudioProjects\RetrofitTutorial\app\build\intermediates\pre-dexed\debug\gson-2.3.1-880cdb9df5696a4cd948d54f7e8f6800e02c65f3.jar" />
+    </item>
+
+</items>

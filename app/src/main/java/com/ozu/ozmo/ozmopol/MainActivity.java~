@@ -49,7 +49,7 @@ public class MainActivity extends MaterialNavigationDrawer {
         //section_notifications.setPressingColor(Color.parseColor("#c0c0c0"));
         this.addSection(section_settings);
 
-//add button functionality
+
         this.addBottomSection(newSection("Logout",new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection materialSection) {

@@ -80,7 +80,7 @@ public class RoomsAdapter extends BaseAdapter {
         followRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
     }

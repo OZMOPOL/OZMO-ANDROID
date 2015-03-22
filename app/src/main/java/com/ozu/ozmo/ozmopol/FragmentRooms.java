@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,8 @@ public class FragmentRooms extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    //
+    StaggeredGridView gridView;
 
 
     /**
@@ -94,12 +98,32 @@ public class FragmentRooms extends Fragment {
 
         RoomsAdapter pAdapter=new RoomsAdapter(getActivity(),myCards);
 
-        StaggeredGridView gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
+        gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
         gridView.setAdapter(pAdapter);
+        updateColumnCountForRooms();
 
     }
 
+    public boolean isTablet(){
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        if (width > 720 && height > 1184){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public void updateColumnCountForRooms(){
+        if(isTablet()){
+            Log.d("Tablet spotted", "sizes won't change");
+        } else {
+            gridView.setColumnCountLandscape(2);
+            gridView.setColumnCountPortrait(1);
+        }
+    }
 
 
 

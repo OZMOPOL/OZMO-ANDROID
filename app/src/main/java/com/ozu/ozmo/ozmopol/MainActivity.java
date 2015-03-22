@@ -58,7 +58,7 @@ public class MainActivity extends MaterialNavigationDrawer {
         }));
 
         disableLearningPattern();
-        addMultiPaneSupport();
+        //addMultiPaneSupport();
        // this.setDrawerBackgroundColor(Color.parseColor("#F7F5E4"));
 //        this.addDivisor();
 //        this.addSection(newSection("Rooms",new FrontPageFragment()).setSectionColor(Color.parseColor("#000000")));

@@ -81,7 +81,7 @@ public class PostsAdapter extends BaseAdapter {
         });
     }
 
-//User's vote value up/down is set 
+    //User's vote value up/down is set
     public void setVoteDownButton(){
         ImageButton voteDown = (ImageButton)getItem(R.id.tv_vote_down);
         voteDown.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +91,7 @@ public class PostsAdapter extends BaseAdapter {
             }
         });
     }
-//the info. for post is transfered to server
+    //the info. for post is transfered to server
     public void setGoToPostButton(){
         ImageButton go2post = (ImageButton)getItem(R.id.tv_go2post);
         go2post.setOnClickListener(new View.OnClickListener() {

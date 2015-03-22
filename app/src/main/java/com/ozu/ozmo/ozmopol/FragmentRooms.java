@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,19 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.ozu.ozmo.ozmopol.Models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentRooms.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentRooms#newInstance} factory method to
- * create an instance of this fragment.
- */
 
 public class FragmentRooms extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -39,8 +30,6 @@ public class FragmentRooms extends Fragment {
     private String mParam2;
     //
     StaggeredGridView gridView;
-
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -73,8 +62,7 @@ public class FragmentRooms extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_rooms, container, false);
 
@@ -84,8 +72,7 @@ public class FragmentRooms extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //getActivity().getActionBar().hide();
-        List<String> myCards=new ArrayList<String>();
+        List<String> myCards = new ArrayList<String>(); //List<Room> myCards = new ArrayList<Room>();
 
         myCards.add("HEy");
         myCards.add("HEy");
@@ -99,7 +86,7 @@ public class FragmentRooms extends Fragment {
         myCards.add("HEy");
         myCards.add("HEy");
 
-        RoomsAdapter pAdapter=new RoomsAdapter(getActivity(),myCards);
+        RoomsAdapter pAdapter = new RoomsAdapter(getActivity(), myCards, getFragmentManager());
 
         gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
         gridView.setAdapter(pAdapter);

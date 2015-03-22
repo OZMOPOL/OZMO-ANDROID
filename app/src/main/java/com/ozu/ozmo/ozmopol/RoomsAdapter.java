@@ -1,7 +1,11 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -17,17 +21,23 @@ import java.util.List;
  */
 
 public class RoomsAdapter extends BaseAdapter {
+
     static class RoomCardViewHolder {
-        TextView tv;
+        TextView roomTitle;
+        TextView roomDescription;
+        Button followButton;
     }
+
     private Activity mContext;
     private List<String> mList;
     private LayoutInflater mLayoutInflater = null;
-    public RoomsAdapter(Activity context, List<String> list) {
+    private FragmentManager fragmentManager;
+
+    public RoomsAdapter(Activity context, List<String> list, FragmentManager fm) {
         mContext = context;
         mList = list;
-        mLayoutInflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mLayoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        fragmentManager = fm;
     }
 
     @Override
@@ -51,6 +61,12 @@ public class RoomsAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.room_item, parent, false);
             vh = new RoomCardViewHolder();
+            vh.roomTitle = (TextView) convertView.findViewById(R.id.room_title);
+            vh.roomDescription = (TextView) convertView.findViewById(R.id.room_description);
+            vh.followButton = (Button) convertView.findViewById(R.id.follow_room_button);
+            setRoomTitleFunctions(vh.roomTitle);
+            setRoomDescription(vh.roomDescription);
+            setFollowButtonFunction(vh.followButton);
             convertView.setTag(vh);
         } else {
             vh = (RoomCardViewHolder) convertView.getTag();
@@ -59,28 +75,30 @@ public class RoomsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void setRoomTitleFunctions(){
-        TextView roomTitle = (TextView)getItem(R.id.room_title);
-        roomTitle.setOnClickListener(new View.OnClickListener() {
+    public void setRoomTitleFunctions(TextView tw){
+        String title = "Room title"; //obtain from server
+        tw.setText(title + "");
+        tw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("room title is", "clicked");
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.grid_view, new FragmentRoomContent()); //PROBLEM HERE
+                transaction.commit();
             }
         });
     }
 
-    public void setRoomDescription(){
-        String text = "a"; //get from server
-        TextView roomDescription = (TextView)getItem(R.id.room_description);
-        roomDescription.setText(text + "");
+    public void setRoomDescription(TextView tw){
+        String text = "b"; //get from server
+        tw.setText(text + "");
     }
 
-    public void setFollowButtonFunction(){
-        Button followRoomButton = (Button)getItem(R.id.follow_room_button);
-        followRoomButton.setOnClickListener(new View.OnClickListener() {
+    public void setFollowButtonFunction(Button b){
+        b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("room", "followed");
             }
         });
     }

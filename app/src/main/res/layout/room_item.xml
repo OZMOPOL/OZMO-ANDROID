@@ -38,14 +38,14 @@
         android:layout_weight="1"></TableRow>
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="248dp"
         android:layout_height="60dp"
-        android:layout_weight="1"
         android:padding="10dp"
         android:text="Room Title"
         android:textSize="18dp"
         android:textColor="@color/title_color"
-        android:id="@+id/room_title" />
+        android:id="@+id/room_title"
+        android:layout_weight="1" />
     <Button
         android:layout_width="100dp"
         android:layout_height="fill_parent"

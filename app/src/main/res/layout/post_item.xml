@@ -81,8 +81,6 @@
                     android:textColor="@color/content_abstract_color"
                     android:text="@string/lorem_ipsum"/>
 
-
-
                 </LinearLayout>
 
             <ImageButton

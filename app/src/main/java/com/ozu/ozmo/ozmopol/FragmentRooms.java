@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +27,7 @@ import java.util.List;
  * Use the {@link FragmentRooms#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class FragmentRooms extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,7 +84,7 @@ public class FragmentRooms extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //getActivity().getActionBar().hide();
         List<String> myCards=new ArrayList<String>();
 
         myCards.add("HEy");
@@ -125,8 +128,6 @@ public class FragmentRooms extends Fragment {
         }
     }
 
-
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -137,6 +138,5 @@ public class FragmentRooms extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
 
 }

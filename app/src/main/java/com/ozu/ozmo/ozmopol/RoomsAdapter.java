@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by amind on 3/13/15.
  */
+
 public class RoomsAdapter extends BaseAdapter {
     static class RoomCardViewHolder {
         TextView tv;
@@ -48,16 +49,12 @@ public class RoomsAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.room_item, parent, false);
             vh = new RoomCardViewHolder();
-            //vh.tv = (TextView) convertView.findViewById(R.id.tv_test);
             convertView.setTag(vh);
         } else {
             vh = (RoomCardViewHolder) convertView.getTag();
         }
-
         double positionHeight = 50;
-
-        //vh.tv.setText("WOOOSSS UP ?");
-
         return convertView;
     }
+
 }

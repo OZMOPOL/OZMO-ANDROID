@@ -3,9 +3,11 @@ package com.ozu.ozmo.ozmopol;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -55,6 +57,32 @@ public class RoomsAdapter extends BaseAdapter {
         }
         double positionHeight = 50;
         return convertView;
+    }
+
+    public void setRoomTitleFunctions(){
+        TextView roomTitle = (TextView)getItem(R.id.room_title);
+        roomTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    public void setRoomDescription(){
+        String text = "a"; //get from server
+        TextView roomDescription = (TextView)getItem(R.id.room_description);
+        roomDescription.setText(text + "");
+    }
+
+    public void setFollowButtonFunction(){
+        Button followRoomButton = (Button)getItem(R.id.follow_room_button);
+        followRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
     }
 
 }

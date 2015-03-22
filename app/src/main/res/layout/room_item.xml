@@ -31,6 +31,12 @@
     android:layout_height="50dp"
     android:id="@+id/room_Title_follower"
     android:orientation="horizontal">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></TableRow>
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="60dp"
@@ -38,14 +44,16 @@
         android:padding="10dp"
         android:text="Room Title"
         android:textSize="18dp"
-        android:textColor="@color/title_color"/>
+        android:textColor="@color/title_color"
+        android:id="@+id/room_title" />
     <Button
         android:layout_width="100dp"
         android:layout_height="fill_parent"
         android:text="@string/follow"
         android:layout_weight="0"
         android:background="@color/line_color"
-        android:textColor="@color/whiteColor"/>
+        android:textColor="@color/whiteColor"
+        android:id="@+id/follow_room_button" />
 
     </LinearLayout>
     <TextView
@@ -54,7 +62,7 @@
         android:textColor="@color/content_abstract_color"
         android:padding="10dp"
         android:text="This is a room description. it can be a long description or a short one, the card will fit for the content."
-        />
+        android:id="@+id/room_description" />
 
  </LinearLayout>
 

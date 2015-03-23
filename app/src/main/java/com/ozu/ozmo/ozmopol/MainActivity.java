@@ -48,7 +48,7 @@ public class MainActivity extends MaterialNavigationDrawer {
             }
         }));
         disableLearningPattern();
-        this.setFragment(fr_rooms_page, "TEST");
+        //setFragment(fr_rooms_page, "TEST");
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {

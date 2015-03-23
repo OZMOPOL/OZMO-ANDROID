@@ -46,3 +46,8 @@ dependencies {
 dependencies {
     compile 'com.google.code.findbugs:jsr305:3.0.0'
 }
+
+dependencies {
+    compile 'com.github.traex.rippleeffect:library:1.2.4'
+    compile 'com.pnikosis:materialish-progress:1.5'
+}

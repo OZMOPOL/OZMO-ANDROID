@@ -73,6 +73,11 @@
                     android:textColor="@color/title_color"
                     android:textSize="17dp"
                     android:text="Post Title comes here for showing (it should have limited characters?"/>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></TableRow>
+
                 <TextView
                     android:id="@+id/tv_post_content"
                     android:layout_width="match_parent"

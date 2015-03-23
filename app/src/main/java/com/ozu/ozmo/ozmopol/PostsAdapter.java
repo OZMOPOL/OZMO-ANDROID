@@ -1,6 +1,8 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -10,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -18,18 +22,23 @@ import java.util.List;
 
 public class PostsAdapter extends BaseAdapter {
 
+    int votes; //the vote count to be received from the server
+
     static class PostCardViewHolder {
-         TextView tv;
+        TextView voteCount, postTitle, postContent;
+        ImageButton voteUpButton, voteDownButton, goToPostButton;
     }
 
     private Activity mContext;
     private List<String> mList;
     private LayoutInflater mLayoutInflater = null;
+    private FragmentManager fragmentManager;
 
-    public PostsAdapter(Activity context, List<String> list) {
+    public PostsAdapter(Activity context, List<String> list, FragmentManager fm) {
         mContext = context;
         mList = list;
         mLayoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        fragmentManager = fm;
     }
 
     @Override
@@ -53,7 +62,18 @@ public class PostsAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.post_item, parent, false);
             vh = new PostCardViewHolder();
-            //vh.tv = (TextView) convertView.findViewById(R.id.tv_test);
+            vh.postTitle = (TextView)convertView.findViewById(R.id.tv_post_title);
+            vh.postContent = (TextView)convertView.findViewById(R.id.tv_post_content);
+            vh.voteCount = (TextView)convertView.findViewById(R.id.tv_votes);
+            vh.voteUpButton = (ImageButton)convertView.findViewById(R.id.tv_vote_up);
+            vh.voteDownButton = (ImageButton)convertView.findViewById(R.id.tv_vote_down);
+            vh.goToPostButton = (ImageButton)convertView.findViewById(R.id.tv_go2post);
+            setVoteUpButton(vh.voteUpButton);
+            setVoteDownButton(vh.voteDownButton);
+            setGoToPostButton(vh.goToPostButton);
+            setVoteCount(vh.voteCount);
+            setPostTitle(vh.postTitle);
+            setPostText(vh.postContent);
             convertView.setTag(vh);
         } else {
             vh = (PostCardViewHolder) convertView.getTag();
@@ -71,53 +91,53 @@ public class PostsAdapter extends BaseAdapter {
     //give functionality to the elements of
     //each post at the front page?
 
-    public void setVoteUpButton(){
-        ImageButton voteUp = (ImageButton)getItem(R.id.tv_vote_up);
-        voteUp.setOnClickListener(new View.OnClickListener() {
+    public void setVoteUpButton(ImageButton imageButton){
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                votes++;
             }
         });
     }
 
     //User's vote value up/down is set
-    public void setVoteDownButton(){
-        ImageButton voteDown = (ImageButton)getItem(R.id.tv_vote_down);
-        voteDown.setOnClickListener(new View.OnClickListener() {
+    public void setVoteDownButton(ImageButton imageButton){
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                votes--;
             }
         });
     }
     //the info. for post is transfered to server
-    public void setGoToPostButton(){
-        ImageButton go2post = (ImageButton)getItem(R.id.tv_go2post);
-        go2post.setOnClickListener(new View.OnClickListener() {
+    public void setGoToPostButton(ImageButton imageButton){
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                //TWO PROBLEMS HERE
+                //1- The problem about the usage of FragmentTransaction
+                //2- Do we have an activity/fragment that actually displays the posts with all the
+                //replies, etc that were given to it?
+                /*transaction.replace(R.id.grid_view, new FragmentRoomContent());*/
+                transaction.commit();
             }
         });
     }
 
-    public void setVoteCount(){
-        int votes = 0; //the info. for the votes is to be obtained from the server.
-        TextView voteCount = (TextView)getItem(R.id.tv_votes);
-        voteCount.setText(votes + "");
+    public void setVoteCount(TextView textView){
+        votes = 0; //the info. for the votes is to be obtained from the server.
+        textView.setText(votes + "");
     }
 
-    public void setPostTitle(){
+    public void setPostTitle(TextView textView){
         String title = "a"; //the info. for the post is to be obtained from the server.
-        TextView postTitle = (TextView)getItem(R.id.tv_post_title);
-        postTitle.setText(title + "");
+        textView.setText(title + "");
     }
 
-    public void setPostText(){
+    public void setPostText(TextView textView){
         String text = "a"; //the info. for the post is to be obtained from the server.
-        TextView postText = (TextView)getItem(R.id.tv_post_content);
-        postText.setText(text + "");
+        textView.setText(text + "");
     }
 
 }

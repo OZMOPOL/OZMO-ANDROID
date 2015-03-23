@@ -14,6 +14,7 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.ozu.ozmo.ozmopol.Models.Contributor;
 import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,9 @@ public class FragmentFrontPage extends Fragment {
                 gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
                 gridView.setAdapter(pAdapter);
                 updateColumnCountForFrontPage();
+
+                ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
+                progressWheel.setVisibility(View.GONE);
             }
 
             @Override

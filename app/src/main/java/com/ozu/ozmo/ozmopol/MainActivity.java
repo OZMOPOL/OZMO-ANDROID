@@ -1,5 +1,7 @@
 package com.ozu.ozmo.ozmopol;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +26,12 @@ public class MainActivity extends MaterialNavigationDrawer {
         this.addAccount(account);
         MaterialSection section_notifications = newSection("Notifications", new FragmentFrontPage());
         this.addSection(section_notifications);
+
         MaterialSection section_front_page = newSection("Front Page", new FragmentFrontPage());
         this.addSection(section_front_page);
-        MaterialSection section_rooms = newSection("Rooms", new FragmentRooms());
+
+        FragmentRooms fr_rooms_page=new FragmentRooms();
+        MaterialSection section_rooms = newSection("Rooms", fr_rooms_page);
         this.addSection(section_rooms);
         MaterialSection section_settings = newSection("Settings", new MaterialSectionListener() {
             @Override
@@ -43,10 +48,12 @@ public class MainActivity extends MaterialNavigationDrawer {
             }
         }));
         disableLearningPattern();
+        this.setFragment(fr_rooms_page, "TEST");
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -55,10 +62,8 @@ public class MainActivity extends MaterialNavigationDrawer {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_create_post:
-                // DO SOMETHING WHEN BUTTON PRESSED!
-                Intent myIntent = new Intent(MainActivity.this, CreatePostActivity.class);
-                //myIntent.putExtra("key", value); //Optional parameters
-                MainActivity.this.startActivity(myIntent);
+                    this.setFragment(new CreatePostFragment(),"Create Post");
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

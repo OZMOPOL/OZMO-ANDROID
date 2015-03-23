@@ -19,8 +19,7 @@ public interface OzmoService {
     @GET("/ozmoPol_WebSrv/resources/ozmopol.post")
     void getPosts(Callback<List<Post>> cb);
 
-    @GET("/repos/amin2ros/HULI")
-    void contributors(Callback<Contributor> cb);
+
 
 
 //    @Headers("Accept: application/json")

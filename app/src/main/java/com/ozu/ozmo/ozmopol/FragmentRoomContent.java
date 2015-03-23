@@ -43,7 +43,7 @@ public class FragmentRoomContent extends Fragment {
         myCards.add("HEy");
         myCards.add("HEy");
 
-        PostsAdapter pAdapter=new PostsAdapter(getActivity(),myCards);
+        PostsAdapter pAdapter = new PostsAdapter(getActivity(), myCards, this.getFragmentManager());
 
         gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
         gridView.setAdapter(pAdapter);

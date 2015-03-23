@@ -118,7 +118,8 @@ public class PostsAdapter extends BaseAdapter {
                 //TWO PROBLEMS HERE
                 //1- The problem about the usage of FragmentTransaction
                 //2- Do we have an activity/fragment that actually displays the posts with all the
-                //replies, etc that were given to it?
+                //replies, etc that were given to it? (like a counterpart of FragmentRoomContent -
+                //the RoomContentAdapter or smth?
                 /*transaction.replace(R.id.grid_view, new FragmentRoomContent());*/
                 transaction.commit();
             }

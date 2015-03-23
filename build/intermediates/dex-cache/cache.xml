@@ -2,81 +2,81 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-6dd1719e54f5a978bc3a237511eb96a1c876abc1.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\classes-738f329cb7fa572fe13fd02b6ad9e267783b60a1.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.9.0\a681c044244d9fc375198588297a39ba78028423\retrofit-1.9.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a681c044244d9fc375198588297a39ba78028423">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\retrofit-1.9.0-8817d499da301a4e405731968ac2234415bd90f0.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-ed7ecb63d9fb3bd3e5360fdd0a0d36d19aa3237b.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\com.balysv\material-ripple\1.0.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\classes-09c7bca5d44297da0d97c47317a524e5c19a1805.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\com.etsy.android.grid\library\1.0.5\classes.jar"
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="8218789edb56bdcfff7da48e892b37460fc707e2">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\classes-d163dd24108375e40aecfff4d330a4d79c8e763f.jar" />
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-5c3b39f187a376063a1e11cda74975dda1d22838.jar" />
     </item>
     <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\classes-d4785667c0b8373fa851375eeffc56e2e265535f.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\21.0.2\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\classes-b7fda1b9d07d4aa70c8b5c977bf4eb1c658d9398.jar" />
-    </item>
-    <item
-        jar="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\exploded-aar\it.neokree\MaterialNavigationDrawer\1.3.2\classes.jar"
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/it.neokree/MaterialNavigationDrawer/1.3.2/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="66d8c086a078286a9597e4aa380a85534b22d36f">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\classes-d2902d5d749fa48096499974a1389cc38bd30447.jar" />
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-6191eedf15e218eeeb285a262b7c1656ad89fef2.jar" />
     </item>
     <item
-        jar="C:\Users\da0517\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.balysv/material-ripple/1.0.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="aba9317bc403d69d8a571c0a72acfe95698a5db0">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-f497ce5c9d9661f4053de2b9a798cdb7efa191d8.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\jsr305-3.0.0-79882aa5217ebe8736c03bff64050f8df0704f4f.jar" />
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0-edc4f381f49af25d895a3ad6a379b3c0ba0bb514.jar" />
     </item>
     <item
-        jar="C:\Users\da0517\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b017100da14f9c158c9f5f2f508333c224b24a7c">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-487245506ecf86a47fd29db01e72b6d61886f566.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-e753af191945f61a6cf84e2a6578c4eb5c3505e5.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-63e1c0172fb2bba8e41170c8fc90daffc4c5f006.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-4069db3758ca2cd7959eff742e215d0f41954f4d.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Users\da0517\Documents\SourceTree\GitHub\OZMO-ANDROID\app\build\intermediates\pre-dexed\debug\gson-2.3.1-880cdb9df5696a4cd948d54f7e8f6800e02c65f3.jar" />
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/gson-2.3.1-6d250ce64eac9dd484fe9730cf4709c932d81e55.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-6de7d8917b03664d6211ce3a5686b594dcb42cc5.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6e5aef773d5a4c7a255fd62e7895bc92fc1a0b52.jar" />
     </item>
 
 </items>

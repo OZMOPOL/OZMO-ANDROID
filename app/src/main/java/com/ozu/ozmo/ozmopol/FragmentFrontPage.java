@@ -1,25 +1,27 @@
 package com.ozu.ozmo.ozmopol;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.ozu.ozmo.ozmopol.Models.Contributor;
+import com.ozu.ozmo.ozmopol.Models.OzmoService;
+import com.ozu.ozmo.ozmopol.Models.Post;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
@@ -40,25 +42,37 @@ public class FragmentFrontPage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<String> myCards=new ArrayList<String>();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://10.100.92.21:8080/")
+                .build();
 
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
+        OzmoService service = restAdapter.create(OzmoService.class);
 
-        PostsAdapter pAdapter=new PostsAdapter(getActivity(),myCards, this.getFragmentManager());
+        final List<Post> myPostCards=new ArrayList<Post>();
 
-        gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
-        gridView.setAdapter(pAdapter);
-        updateColumnCountForFrontPage();
+        service.getPosts(new Callback<List<Post>>() {
+            @Override
+            public void success(List<Post> posts, Response response) {
+                for (int i=0;i<posts.size();i++){
+                    if (posts.get(i).postTitle !=null ){
+                        myPostCards.add(posts.get(i));
+                    }
+                }
+
+                PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentFrontPage.this.getFragmentManager());
+
+                gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
+                gridView.setAdapter(pAdapter);
+                updateColumnCountForFrontPage();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
+
 
     }
 

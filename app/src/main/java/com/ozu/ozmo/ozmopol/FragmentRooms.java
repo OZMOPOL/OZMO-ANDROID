@@ -1,20 +1,15 @@
 package com.ozu.ozmo.ozmopol;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.ozu.ozmo.ozmopol.Models.Room;
 
 import java.util.ArrayList;
 import java.util.List;

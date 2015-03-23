@@ -1,9 +1,11 @@
 package com.ozu.ozmo.ozmopol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import it.neokree.materialnavigationdrawer.elements.MaterialAccount;
@@ -43,11 +45,22 @@ public class MainActivity extends MaterialNavigationDrawer {
         disableLearningPattern();
 
     }
-    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_create_post:
+                // DO SOMETHING WHEN BUTTON PRESSED!
+                Intent myIntent = new Intent(MainActivity.this, CreatePostActivity.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                MainActivity.this.startActivity(myIntent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

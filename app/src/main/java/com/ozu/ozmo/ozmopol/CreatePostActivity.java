@@ -1,12 +1,13 @@
 package com.ozu.ozmo.ozmopol;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class CreatePostActivity extends ActionBarActivity {
+public class CreatePostActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -40,7 +40,7 @@ public class MainActivity extends MaterialNavigationDrawer {
             }
         });
         this.addSection(section_settings);
-        //add button functionality
+        //add button function
         this.addBottomSection(newSection("Logout",new MaterialSectionListener() {
             @Override
             public void onClick(MaterialSection materialSection) {

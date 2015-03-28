@@ -2,6 +2,41 @@
 <items version="2" >
 
     <item
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8218789edb56bdcfff7da48e892b37460fc707e2">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-5c3b39f187a376063a1e11cda74975dda1d22838.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0-edc4f381f49af25d895a3ad6a379b3c0ba0bb514.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.mikepenz.materialdrawer/library/2.6.5/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="70a06bb8ea1bce9cf6f4527f2582f4d75f05be6f">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-7b137ea476c39edcc70f9f2a73e80cdfc60b29bb.jar" />
+    </item>
+    <item
+        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/gson-2.3.1-6d250ce64eac9dd484fe9730cf4709c932d81e55.jar" />
+    </item>
+    <item
+        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.mikepenz.iconics/library/0.7.9/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="bb062683c83aedca57d738d2624e650351321815">
+        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-b5313edd8ccf9c3a4af8dcc4d5297387cc2fdbc3.jar" />
+    </item>
+    <item
         jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.5/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -16,25 +51,11 @@
         <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-ea3741f3c6cafd36130815575fd7e1be524b5df8.jar" />
     </item>
     <item
-        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.etsy.android.grid/library/1.0.5/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8218789edb56bdcfff7da48e892b37460fc707e2">
-        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-5c3b39f187a376063a1e11cda74975dda1d22838.jar" />
-    </item>
-    <item
         jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
         <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/picasso-2.5.2-ba4eb554523706a884d924fbc606da3f5efae3c6.jar" />
-    </item>
-    <item
-        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0-edc4f381f49af25d895a3ad6a379b3c0ba0bb514.jar" />
     </item>
     <item
         jar="/Users/amind/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
@@ -58,13 +79,6 @@
         <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-2de58fdfc1d3d5019c8ac9e89e4446e7a091edcd.jar" />
     </item>
     <item
-        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.mikepenz.materialdrawer/library/2.6.5/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="70a06bb8ea1bce9cf6f4527f2582f4d75f05be6f">
-        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-7b137ea476c39edcc70f9f2a73e80cdfc60b29bb.jar" />
-    </item>
-    <item
         jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -86,25 +100,11 @@
         <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-63e1c0172fb2bba8e41170c8fc90daffc4c5f006.jar" />
     </item>
     <item
-        jar="/Users/amind/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/gson-2.3.1-6d250ce64eac9dd484fe9730cf4709c932d81e55.jar" />
-    </item>
-    <item
         jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.mikepenz.iconics/octicons-typeface/2.2.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b5d19bd6ad8814ad6c35c49f10fb04ee803688bf">
         <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-e732e625a1007333476afe43b0b413f049669ab8.jar" />
-    </item>
-    <item
-        jar="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/exploded-aar/com.mikepenz.iconics/library/0.7.9/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="bb062683c83aedca57d738d2624e650351321815">
-        <dex dex="/Users/amind/Documents/OZMO-ANDROID/app/build/intermediates/pre-dexed/debug/classes-b5313edd8ccf9c3a4af8dcc4d5297387cc2fdbc3.jar" />
     </item>
 
 </items>

@@ -105,19 +105,24 @@ public class OzmoActivity extends ActionBarActivity {
 
                         if (drawerItem != null) {
                             int selected_index=drawerItem.getIdentifier();
-                            if ( selected_index== 2) {
-                                Fragment newFragment = new FragmentRooms();
-                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                                // Replace whatever is in the fragment_container view with this fragment,
-                                // and add the transaction to the back stack
-                                transaction.replace(R.id.fragment_container, newFragment);
-                                transaction.addToBackStack(null);
-
-                                // Commit the transaction
-                                transaction.commit();
+                            Fragment newFragment=new FragmentFrontPage();
+                            if(selected_index== 2){
+                                 newFragment = new FragmentFrontPage();
 
                             }
+                            else if ( selected_index== 3) {
+                                 newFragment = new FragmentRooms();
+                            }
+
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                            // Replace whatever is in the fragment_container view with this fragment,
+                            // and add the transaction to the back stack
+                            transaction.replace(R.id.fragment_container, newFragment);
+                            transaction.addToBackStack(null);
+
+                            // Commit the transaction
+                            transaction.commit();
 //                            } else if (drawerItem.getIdentifier() == 2) {
 //                                Intent intent = new Intent(SimpleHeaderDrawerActivity.this, ActionBarDrawerActivity.class);
 //                                SimpleHeaderDrawerActivity.this.startActivity(intent);

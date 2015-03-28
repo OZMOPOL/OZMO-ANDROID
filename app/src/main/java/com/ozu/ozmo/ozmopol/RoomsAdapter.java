@@ -14,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ozu.ozmo.ozmopol.Models.Room;
+
 import java.util.List;
 
 /**
@@ -29,13 +31,13 @@ public class RoomsAdapter extends BaseAdapter {
     }
 
     private Activity mContext;
-    private List<String> mList;
+    private List<Room> mList;
     private LayoutInflater mLayoutInflater = null;
     private FragmentManager fragmentManager;
 
-    public RoomsAdapter(Activity context, List<String> list, FragmentManager fm) {
+    public RoomsAdapter(Activity context, List<Room> rooms, FragmentManager fm) {
         mContext = context;
-        mList = list;
+        mList = rooms;
         mLayoutInflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         fragmentManager = fm;
     }
@@ -64,14 +66,13 @@ public class RoomsAdapter extends BaseAdapter {
             vh.roomTitle = (TextView) convertView.findViewById(R.id.room_title);
             vh.roomDescription = (TextView) convertView.findViewById(R.id.room_description);
             vh.followButton = (Button) convertView.findViewById(R.id.follow_room_button);
-            setRoomTitleFunctions(vh.roomTitle);
-            setRoomDescription(vh.roomDescription);
-            setFollowButtonFunction(vh.followButton);
+
+            vh.roomTitle.setText(mList.get(position).roomTitle);
+            vh.roomDescription.setText(mList.get(position).roomDesc);
             convertView.setTag(vh);
         } else {
             vh = (RoomCardViewHolder) convertView.getTag();
         }
-        double positionHeight = 50;
         return convertView;
     }
 

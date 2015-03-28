@@ -72,25 +72,11 @@ public class PostsAdapter extends BaseAdapter {
             vh.postTitle.setText(mList.get(position).postTitle);
             vh.postContent.setText(mList.get(position).postContent);
 
-
-//            vh.voteCount = (TextView)convertView.findViewById(R.id.tv_votes);
-//            vh.voteUpButton = (ImageButton)convertView.findViewById(R.id.tv_vote_up);
-//            vh.voteDownButton = (ImageButton)convertView.findViewById(R.id.tv_vote_down);
-//            vh.goToPostButton = (ImageButton)convertView.findViewById(R.id.tv_go2post);
-//            setVoteUpButton(vh.voteUpButton);
-//            setVoteDownButton(vh.voteDownButton);
-//            setGoToPostButton(vh.goToPostButton);
-//            setVoteCount(vh.voteCount);
-//            setPostTitle(vh.postTitle);
-//            setPostText(vh.postContent);
             convertView.setTag(vh);
         } else {
             vh = (PostCardViewHolder) convertView.getTag();
         }
 
-        double positionHeight = 50;
-
-        //vh.tv.setText("WOOOSSS UP ?");
 
         return convertView;
     }

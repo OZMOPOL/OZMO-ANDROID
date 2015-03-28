@@ -13,9 +13,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.ozu.ozmo.ozmopol.Models.OzmoService;
+import com.ozu.ozmo.ozmopol.Models.Post;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class FragmentRoomContent extends Fragment {
     StaggeredGridView gridView;
@@ -28,6 +35,11 @@ public class FragmentRoomContent extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
+
+
 
         List<String> myCards=new ArrayList<String>();
 

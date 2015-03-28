@@ -20,7 +20,9 @@ public interface OzmoService {
     void getPosts(Callback<List<Post>> cb);
 
 
-
+    @Headers("Accept: application/json")
+    @GET("/Ozmopol/webresources/entities.room")
+    void getRooms(Callback<List<Room>> cb);
 
 //    @Headers("Accept: application/json")
 //    @GET("/ozmoPol_WebSrv/resources/ozmopol.post")

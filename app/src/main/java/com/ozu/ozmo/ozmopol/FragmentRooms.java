@@ -10,9 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.ozu.ozmo.ozmopol.Models.OzmoService;
+import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class FragmentRooms extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -67,25 +75,31 @@ public class FragmentRooms extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        List<String> myCards = new ArrayList<String>(); //List<Room> myCards = new ArrayList<Room>();
 
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
-        myCards.add("HEy");
+        final List<Room> myCards = new ArrayList<Room>();
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://10.100.92.22:8080")
+                .build();
 
-        RoomsAdapter pAdapter = new RoomsAdapter(getActivity(), myCards, getFragmentManager());
+        OzmoService service = restAdapter.create(OzmoService.class);
 
-        gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
-        gridView.setAdapter(pAdapter);
-        updateColumnCountForRooms();
+        service.getRooms(new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                myCards.addAll(rooms);
+                RoomsAdapter pAdapter = new RoomsAdapter(getActivity(), myCards, getFragmentManager());
+
+                gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
+                gridView.setAdapter(pAdapter);
+                updateColumnCountForRooms();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
 
     }
 
@@ -103,7 +117,8 @@ public class FragmentRooms extends Fragment {
 
     public void updateColumnCountForRooms(){
         if(isTablet()){
-            Log.d("Tablet spotted", "sizes won't change");
+            gridView.setColumnCountLandscape(2);
+            gridView.setColumnCountPortrait(2);
         } else {
             gridView.setColumnCountLandscape(2);
             gridView.setColumnCountPortrait(1);

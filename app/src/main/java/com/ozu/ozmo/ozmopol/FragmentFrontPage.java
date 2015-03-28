@@ -25,9 +25,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-/**
- * Created by neokree on 24/11/14.
- */
 
 
 public class FragmentFrontPage extends Fragment {

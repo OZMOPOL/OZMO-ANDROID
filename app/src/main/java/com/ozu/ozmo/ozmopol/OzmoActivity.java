@@ -3,6 +3,8 @@
 
 package com.ozu.ozmo.ozmopol;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -101,10 +103,21 @@ public class OzmoActivity extends ActionBarActivity {
                         //--> click on the footer
                         //those items don't contain a drawerItem
 
-//                        if (drawerItem != null) {
-//                            if (drawerItem.getIdentifier() == 1) {
-//                                Intent intent = new Intent(SimpleHeaderDrawerActivity.this, SimpleCompactHeaderDrawerActivity.class);
-//                                SimpleHeaderDrawerActivity.this.startActivity(intent);
+                        if (drawerItem != null) {
+                            int selected_index=drawerItem.getIdentifier();
+                            if ( selected_index== 2) {
+                                Fragment newFragment = new FragmentRooms();
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                                // Replace whatever is in the fragment_container view with this fragment,
+                                // and add the transaction to the back stack
+                                transaction.replace(R.id.fragment_container, newFragment);
+                                transaction.addToBackStack(null);
+
+                                // Commit the transaction
+                                transaction.commit();
+
+                            }
 //                            } else if (drawerItem.getIdentifier() == 2) {
 //                                Intent intent = new Intent(SimpleHeaderDrawerActivity.this, ActionBarDrawerActivity.class);
 //                                SimpleHeaderDrawerActivity.this.startActivity(intent);
@@ -123,7 +136,7 @@ public class OzmoActivity extends ActionBarActivity {
 //                            } else if (drawerItem.getIdentifier() == 20) {
 //                                new Libs.Builder().withFields(R.string.class.getFields()).withActivityTheme(R.style.MaterialDrawerTheme_ActionBar).start(SimpleHeaderDrawerActivity.this);
 //                            }
-//                        }
+                        }
                     }
                 })
                 .withSavedInstance(savedInstanceState)

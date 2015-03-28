@@ -16,7 +16,7 @@ public interface OzmoService {
 //    void getFrontPagePosts(@Path("id") int id, Callback<Post> cb);
 
     @Headers("Accept: application/json")
-    @GET("/ozmoPol_WebSrv/resources/ozmopol.post")
+    @GET("/Ozmopol/webresources/entities.post")
     void getPosts(Callback<List<Post>> cb);
 
 
@@ -25,6 +25,4 @@ public interface OzmoService {
 //    @Headers("Accept: application/json")
 //    @GET("/ozmoPol_WebSrv/resources/ozmopol.post")
 //    void getPosts(Callback<List<Post>> cb);
-
-
 }

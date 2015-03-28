@@ -41,7 +41,7 @@ public class FragmentFrontPage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://10.100.92.21:8080/")
+                .setEndpoint("http://10.100.92.22:8080")
                 .build();
 
         OzmoService service = restAdapter.create(OzmoService.class);

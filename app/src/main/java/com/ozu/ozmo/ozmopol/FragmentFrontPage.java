@@ -70,7 +70,7 @@ public class FragmentFrontPage extends Fragment {
         });
     }
 
-    public void addSwipeRefreshFunction(){
+    public void addSwipeRefreshFunction(){ //functionality to be set
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

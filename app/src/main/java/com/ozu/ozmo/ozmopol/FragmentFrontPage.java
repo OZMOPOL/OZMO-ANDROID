@@ -1,9 +1,11 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 
 import android.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ import retrofit.client.Response;
 public class FragmentFrontPage extends Fragment {
 
     StaggeredGridView gridView;
+    SwipeRefreshLayout swipeLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,15 +42,11 @@ public class FragmentFrontPage extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://10.100.92.21:8080/")
-                .build();
-
+        swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
+        setSwipeLayoutFunctions();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.21:8080/").build();
         OzmoService service = restAdapter.create(OzmoService.class);
-
         final List<Post> myPostCards=new ArrayList<Post>();
-
         service.getPosts(new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
@@ -56,15 +55,12 @@ public class FragmentFrontPage extends Fragment {
                         myPostCards.add(posts.get(i));
                     }
                 }
-
                 PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentFrontPage.this.getFragmentManager());
-
                 gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
                 gridView.setAdapter(pAdapter);
                 updateColumnCountForFrontPage();
-
-                ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
-                progressWheel.setVisibility(View.GONE);
+               // ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
+              //  progressWheel.setVisibility(View.GONE);
             }
 
             @Override
@@ -75,6 +71,23 @@ public class FragmentFrontPage extends Fragment {
 
 
 
+    }
+
+    public void setSwipeLayoutFunctions(){
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        swipeLayout.setRefreshing(false);
+                    }
+                }, 5000);
+            }
+        });
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     public boolean isTablet(){

@@ -1,8 +1,10 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +35,7 @@ public class FragmentRooms extends Fragment {
     private String mParam2;
     //
     StaggeredGridView gridView;
+    SwipeRefreshLayout swipeLayout;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -68,14 +71,13 @@ public class FragmentRooms extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_rooms, container, false);
-
-
-
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
+        addSwipeRefreshFunction();
         final List<Room> myCards = new ArrayList<Room>();
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://10.100.92.22:8080")
@@ -101,6 +103,24 @@ public class FragmentRooms extends Fragment {
         });
 
 
+    }
+
+
+    public void addSwipeRefreshFunction(){ //functionality to be set
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        swipeLayout.setRefreshing(false);
+                    }
+                }, 5000);
+            }
+        });
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     public boolean isTablet(){

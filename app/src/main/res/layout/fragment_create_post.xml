@@ -19,17 +19,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_title" />
-    <TextView android:text="URL :" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/title_color"
-        />
+        android:id="@+id/fragment_create_post_title" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_url" />
-    <TextView android:text="Post Content :" android:layout_width="wrap_content"
+        <TextView android:text="Post Content :" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/title_color"
         />
@@ -39,12 +31,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="top"
-        android:id="@+id/editText_content" />
+        android:id="@+id/fragment_create_post_content" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Post"
-        android:id="@+id/submit_post" />
+        android:id="@+id/fragment_create_post_submit_post" />
     </LinearLayout>
 </FrameLayout>

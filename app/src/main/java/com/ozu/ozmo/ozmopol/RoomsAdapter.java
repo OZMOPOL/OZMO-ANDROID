@@ -5,9 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -23,6 +21,9 @@ import java.util.List;
  */
 
 public class RoomsAdapter extends BaseAdapter {
+
+
+
 
     static class RoomCardViewHolder {
         TextView roomTitle;
@@ -58,7 +59,7 @@ public class RoomsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         RoomCardViewHolder vh;
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.room_item, parent, false);
@@ -69,6 +70,29 @@ public class RoomsAdapter extends BaseAdapter {
 
             vh.roomTitle.setText(mList.get(position).roomTitle);
             vh.roomDescription.setText(mList.get(position).roomDesc);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Room room =mList.get(position);
+                    ((MyApplication) mContext.getApplication()).selectedRoomId=room.pkRoomId;
+
+                    // Create new fragment and transaction
+                    Fragment newFragment = new FragmentRoomContent();
+                    FragmentTransaction transaction =mContext.getFragmentManager().beginTransaction();
+
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack
+
+                    transaction.add(R.id.fragment_container,newFragment);
+
+                    // Commit the transaction
+                    transaction.commit();
+
+
+                }
+            });
+
             convertView.setTag(vh);
         } else {
             vh = (RoomCardViewHolder) convertView.getTag();
@@ -76,32 +100,6 @@ public class RoomsAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void setRoomTitleFunctions(TextView tw){
-        String title = "Room title"; //obtain from server
-        tw.setText(title + "");
-        tw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("room title is", "clicked");
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.grid_view, new FragmentRoomContent()); //PROBLEM HERE
-                transaction.commit();
-            }
-        });
-    }
 
-    public void setRoomDescription(TextView tw){
-        String text = "b"; //get from server
-        tw.setText(text + "");
-    }
-
-    public void setFollowButtonFunction(Button b){
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("room", "followed");
-            }
-        });
-    }
 
 }

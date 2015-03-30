@@ -26,7 +26,7 @@
             android:id="@+id/header_view">
 
             <LinearLayout
-                android:id="@+id/votes_buttons"
+                android:id="@+id/votes_layout"
                 android:layout_width="50dp"
                 android:layout_weight="0"
                 android:layout_height="match_parent"
@@ -41,6 +41,7 @@
                     android:background="@null"
                     android:id="@+id/tv_vote_up" />
                 <TextView
+
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:padding="2dp"
@@ -71,6 +72,33 @@
                     android:layout_height="1dp"
                     android:background="@color/whiteColor"
                     />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="13dp"
+                        android:text="created by"/>
+                    <TextView
+                        android:id="@+id/tv_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textColor="@color/line_color"
+                        android:textSize="13dp"
+                        android:text="aminD"/>
+
+
+
+                    </LinearLayout>
+
+
+
                 <TextView
                     android:id="@+id/tv_post_title"
                     android:layout_width="match_parent"
@@ -93,7 +121,7 @@
                 </LinearLayout>
 
             <ImageButton
-                android:layout_width="100dp"
+                android:layout_width="40dp"
                 android:paddingLeft="5dp"
                 android:layout_height="fill_parent"
                 android:background="@null"

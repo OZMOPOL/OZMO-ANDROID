@@ -1,6 +1,7 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ozu.ozmo.ozmopol.Models.Post;
@@ -27,9 +29,9 @@ public class PostsAdapter extends BaseAdapter {
     int votes; //the vote count to be received from the server
 
     static class PostCardViewHolder {
-        TextView voteCount, postTitle, postContent;
+        TextView voteCount, postTitle, postContent,postUserName,postDate;
         ImageButton voteUpButton, voteDownButton, goToPostButton;
-
+        LinearLayout votesLayer;
 
     }
 
@@ -61,16 +63,45 @@ public class PostsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         PostCardViewHolder vh;
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.post_item, parent, false);
             vh = new PostCardViewHolder();
             vh.postTitle = (TextView)convertView.findViewById(R.id.tv_post_title);
             vh.postContent = (TextView)convertView.findViewById(R.id.tv_post_content);
+            vh.voteCount= (TextView)convertView.findViewById(R.id.tv_votes);
+            vh.postUserName = (TextView) convertView.findViewById(R.id.tv_user);
 
-            vh.postTitle.setText(mList.get(position).postTitle);
-            vh.postContent.setText(mList.get(position).postContent);
+            vh.votesLayer=(LinearLayout)convertView.findViewById(R.id.votes_layout);
+
+            Post post=mList.get(position);
+            vh.postTitle.setText(post.postTitle);
+            vh.postContent.setText(post.postContent);
+            vh.voteCount.setText(post.voteCount);
+            vh.postUserName.setText(post.postUserName);
+
+            if (post.postTitle==null){
+                vh.votesLayer.setVisibility(View.GONE);
+            }
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   ((MyApplication) mContext.getApplication()).selectedPostId=mList.get(position).pkPostId;
+
+                    // Create new fragment and transaction
+                    Fragment newFragment = new FragmentPostContent();
+                    FragmentTransaction transaction =mContext.getFragmentManager().beginTransaction();
+
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack
+                    transaction.replace(R.id.fragment_container, newFragment);
+                    // transaction.addToBackStack();
+
+                    // Commit the transaction
+                    transaction.commit();
+                }
+            });
 
             convertView.setTag(vh);
         } else {

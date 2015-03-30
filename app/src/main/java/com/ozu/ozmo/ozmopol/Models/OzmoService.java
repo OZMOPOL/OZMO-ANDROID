@@ -12,14 +12,22 @@ import retrofit.http.Path;
  */
 public interface OzmoService {
 
-//    @GET("/posts/{id}/frontpage")
-//    void getFrontPagePosts(@Path("id") int id, Callback<Post> cb);
+    @GET("/Ozmopol/webresources/entities.post/getFrontPage")
+    void getFrontPagePosts(Callback<List<Post>> cb);
 
-    @Headers("Accept: application/json")
-    @GET("/Ozmopol/webresources/entities.post")
-    void getPosts(Callback<List<Post>> cb);
+    @GET("/Ozmopol/webresources/entities.post/getRoomContents/{id}")
+    void getRoomContents(@Path("id") String roomId,Callback<List<Post>> cb);
 
 
+    @GET("/Ozmopol/webresources/entities.post/getPostContents/{id}")
+    void getPostContents(@Path("id") String postId,Callback<Post> cb);
+
+
+//    @Headers("Accept: application/json")
+//    @GET("/Ozmopol/webresources/entities.post")
+//    void getPosts(Callback<List<Post>> cb);
+//
+//
     @Headers("Accept: application/json")
     @GET("/Ozmopol/webresources/entities.room")
     void getRooms(Callback<List<Room>> cb);

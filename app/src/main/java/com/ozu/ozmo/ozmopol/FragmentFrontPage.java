@@ -47,14 +47,11 @@ public class FragmentFrontPage extends Fragment {
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
         OzmoService service = restAdapter.create(OzmoService.class);
         final List<Post> myPostCards=new ArrayList<Post>();
-        service.getPosts(new Callback<List<Post>>() {
+
+        service.getFrontPagePosts(new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
-                for (int i=0;i<posts.size();i++){
-                    if (posts.get(i).postTitle !=null ){
-                        myPostCards.add(posts.get(i));
-                    }
-                }
+                myPostCards.addAll(posts);
                 PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentFrontPage.this.getFragmentManager());
                 gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
                 gridView.setAdapter(pAdapter);
@@ -68,6 +65,8 @@ public class FragmentFrontPage extends Fragment {
 
             }
         });
+
+
     }
 
     public void addSwipeRefreshFunction(){

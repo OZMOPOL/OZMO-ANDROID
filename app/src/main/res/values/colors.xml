@@ -5,4 +5,5 @@
     <color name="title_color">#000000</color>
     <color name="line_color">#088DA5</color>
     <color name="content_abstract_color">#666666</color>
+    <color name="text_gray_color">#C7C7CC</color>
 </resources>

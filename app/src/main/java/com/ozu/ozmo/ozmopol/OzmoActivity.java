@@ -37,7 +37,8 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.octicons_typeface_library.Octicons;
 
 
-public class OzmoActivity extends ActionBarActivity {
+public class OzmoActivity extends ActionBarActivity implements FragmentPostContent.OnFragmentInteractionListener {
+    public int selectedRoomIndex=0;
     private static final int PROFILE_SETTING = 1;
     //save our header or result
     private AccountHeader.Result headerResult = null;
@@ -204,7 +205,19 @@ public class OzmoActivity extends ActionBarActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.action_create_post:
+                // Create new fragment and transaction
+                Fragment newFragment = new CreatePostFragment();
+                FragmentTransaction transaction =getFragmentManager().beginTransaction();
 
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack
+                transaction.replace(R.id.fragment_container, newFragment);
+                // transaction.addToBackStack();
+
+                // Commit the transaction
+                transaction.commit();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -217,5 +230,10 @@ public class OzmoActivity extends ActionBarActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

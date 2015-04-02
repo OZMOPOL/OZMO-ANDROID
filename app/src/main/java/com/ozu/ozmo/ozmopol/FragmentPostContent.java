@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.andexert.expandablelayout.library.ExpandableLayoutListView;
 import com.etsy.android.grid.StaggeredGridView;
 import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
@@ -46,6 +47,7 @@ public class FragmentPostContent extends Fragment {
     private String mParam2;
     StaggeredGridView gridView;
     SwipeRefreshLayout swipeLayout;
+    ExpandableLayoutListView expandableLayoutListView;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -82,7 +84,7 @@ public class FragmentPostContent extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String postId=((MyApplication) getActivity().getApplication()).selectedPostId;
+        String postId = ((MyApplication) getActivity().getApplication()).selectedPostId;
 
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.fragment_post_content_swipe_container);
         addSwipeRefreshFunction();
@@ -100,9 +102,12 @@ public class FragmentPostContent extends Fragment {
                     myPostCards.add(post.comments.get(i));
                 }
 
-                PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentPostContent.this.getFragmentManager());
-                gridView = (StaggeredGridView)getView().findViewById(R.id.fragment_post_content_grid_view);
-                gridView.setAdapter(pAdapter);
+                PostsAdapter pAdapter = new PostsAdapter(getActivity(),myPostCards, FragmentPostContent.this.getFragmentManager());
+                /* gridView = (StaggeredGridView)getView().findViewById(R.id.fragment_post_content_grid_view);
+                gridView.setAdapter(pAdapter); */
+
+                expandableLayoutListView = (ExpandableLayoutListView)getView().findViewById(R.id.listview);
+                expandableLayoutListView.setAdapter(pAdapter);
 
                 ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
                 progressWheel.setVisibility(View.GONE);
@@ -117,14 +122,9 @@ public class FragmentPostContent extends Fragment {
 
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_post_content, container, false);
-
-
-
-
     }
 
     public void addSwipeRefreshFunction(){
@@ -177,10 +177,11 @@ public class FragmentPostContent extends Fragment {
         if(isTablet()){
             Log.d("Tablet spotted", "sizes won't change");
         } else {
-            gridView.setColumnCountLandscape(1);
-            gridView.setColumnCountPortrait(1);
+           gridView.setColumnCountLandscape(1);
+           gridView.setColumnCountPortrait(1);
         }
     }
+
     @Override
     public void onDetach() {
         super.onDetach();

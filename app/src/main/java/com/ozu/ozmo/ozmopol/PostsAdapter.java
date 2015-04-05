@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,7 +30,7 @@ public class PostsAdapter extends BaseAdapter {
     int votes; //the vote count to be received from the server
 
     static class PostCardViewHolder {
-        TextView voteCount, postTitle, postContent,postUserName,postDate;
+        TextView voteCount, postTitle, postContent,postUserName,postCDate;
         ImageButton voteUpButton, voteDownButton, goToPostButton;
         LinearLayout votesLayer;
 
@@ -72,21 +73,30 @@ public class PostsAdapter extends BaseAdapter {
             vh.postContent = (TextView)convertView.findViewById(R.id.tv_post_content);
             vh.voteCount= (TextView)convertView.findViewById(R.id.tv_votes);
             vh.postUserName = (TextView) convertView.findViewById(R.id.tv_user);
-
+            vh.postCDate = (TextView) convertView.findViewById(R.id.tv_createDate);
+            vh.goToPostButton=(ImageButton) convertView.findViewById(R.id.tv_go2post);
             vh.votesLayer=(LinearLayout)convertView.findViewById(R.id.votes_layout);
+            vh.voteDownButton=(ImageButton)convertView.findViewById(R.id.tv_vote_down);
+            vh.voteUpButton=(ImageButton)convertView.findViewById(R.id.tv_vote_up);
+
+
 
             Post post=mList.get(position);
             vh.postTitle.setText(post.postTitle);
             vh.postContent.setText(post.postContent);
             vh.voteCount.setText(post.voteCount);
-            vh.postUserName.setText(post.postUserName);
+            vh.postUserName.setText(post.fkPostUserId.userName);
+            vh.postCDate.setText(post.postCDate);
 
             if (post.postTitle==null){
                 vh.votesLayer.setVisibility(View.GONE);
+                vh.goToPostButton.setVisibility(View.GONE);
             }
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (mList.get(position).postTitle==null)
+                        return;
                    ((MyApplication) mContext.getApplication()).selectedPostId=mList.get(position).pkPostId;
 
                     // Create new fragment and transaction
@@ -96,7 +106,7 @@ public class PostsAdapter extends BaseAdapter {
                     // Replace whatever is in the fragment_container view with this fragment,
                     // and add the transaction to the back stack
                     transaction.replace(R.id.fragment_container, newFragment);
-                    // transaction.addToBackStack();
+                    transaction.addToBackStack("FragmentFrontPage");
 
                     // Commit the transaction
                     transaction.commit();

@@ -1,5 +1,7 @@
+
 package com.ozu.ozmo.ozmopol;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -10,10 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Room;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -36,14 +41,35 @@ public class FragmentRoomContent extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        String roomId=((MyApplication) getActivity().getApplication()).selectedRoomId;
+
+
+        Button btnCreatePost=(Button)getView().findViewById(R.id.btn_create_post);
+        btnCreatePost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create new fragment and transaction
+                Fragment newFragment = new CreatePostFragment();
+                FragmentTransaction transaction =getFragmentManager().beginTransaction();
+
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack
+                transaction.replace(R.id.fragment_container, newFragment);
+                transaction.addToBackStack("FragmentRoomContent");
+
+                // Commit the transaction
+                transaction.commit();
+
+            }
+        });
+
+        Room room=((MyApplication) getActivity().getApplication()).selectedRoom;
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
         OzmoService service = restAdapter.create(OzmoService.class);
         final List<Post> myPostCards=new ArrayList<Post>();
 
 
-        service.getRoomContents(roomId,new Callback<List<Post>>() {
+        service.getRoomContents(room.pkRoomId,new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
 
@@ -54,6 +80,10 @@ public class FragmentRoomContent extends Fragment {
                  updateColumnCountForFrontPage();
                  ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.room_content_progress_wheel);
                  progressWheel.setVisibility(View.GONE);
+                if (posts.size()!=0){
+                    TextView tvEmptyRoom=(TextView)getView().findViewById(R.id.tv_empty_room);
+                    tvEmptyRoom.setVisibility(View.GONE);
+                }
             }
 
             @Override

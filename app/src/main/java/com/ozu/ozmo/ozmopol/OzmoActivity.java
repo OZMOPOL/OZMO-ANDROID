@@ -3,9 +3,12 @@
 
 package com.ozu.ozmo.ozmopol;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,11 +38,22 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.octicons_typeface_library.Octicons;
+import com.ozu.ozmo.ozmopol.Models.OzmoService;
+import com.ozu.ozmo.ozmopol.Models.Room;
+import com.ozu.ozmo.ozmopol.Models.User;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
-public class OzmoActivity extends ActionBarActivity implements FragmentPostContent.OnFragmentInteractionListener {
+public class OzmoActivity extends ActionBarActivity implements FragmentPostContent.OnFragmentInteractionListener,
+        CreatePostFragment.OnFragmentInteractionListener,DialogLogin.OnFragmentInteractionListener,DialogSignup.OnFragmentInteractionListener {
     public int selectedRoomIndex=0;
     private static final int PROFILE_SETTING = 1;
+    Bundle savedInstanceState;
+    Toolbar toolbar;
     //save our header or result
     private AccountHeader.Result headerResult = null;
     private Drawer.Result result = null;
@@ -52,6 +66,50 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        this.savedInstanceState=savedInstanceState;
+        this.toolbar=toolbar;
+        showDrawer();
+
+
+
+
+        SharedPreferences prefs = this.getSharedPreferences(
+                "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
+
+
+        boolean loggedIn= prefs.getBoolean("loggedIn",false);
+        if (loggedIn){
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+            OzmoService service = restAdapter.create(OzmoService.class);
+            String userName=prefs.getString("userName","");
+            service.getUserByUserName(userName,new Callback<User>() {
+                @Override
+                public void success(User user, Response response) {
+                    // Logged in
+                    ((MyApplication) getApplication()).user=user;
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            showFrontPage();
+        }else{
+            getSupportActionBar().hide();
+            showLoginDialog();
+        }
+
+
+
+
+
+        //((MyApplication) getApplication()).user=new User("bjksefkhjw49ub43","1200-01-01T00:00:00+02:00","jesey@ozu.edu.tr","Jesey","bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43bjksefkhjw49ub43","1");
+
+    }
+    public void showDrawer(){
         // Create a few sample profile
         // NOTE you have to define the loader logic too. See the CustomApplication for more details
         final IProfile profile = new ProfileDrawerItem().withName("Amin Dorostanian").withEmail("amin.dorost@gmail.com");
@@ -63,7 +121,7 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
                 .addProfiles(
                         profile,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
-                       // new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(PROFILE_SETTING),
+                        // new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(PROFILE_SETTING),
                         new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
                 )
 //                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
@@ -108,11 +166,11 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
                             int selected_index=drawerItem.getIdentifier();
                             Fragment newFragment=new FragmentFrontPage();
                             if(selected_index== 2){
-                                 newFragment = new FragmentFrontPage();
+                                newFragment = new FragmentFrontPage();
 
                             }
                             else if ( selected_index== 3) {
-                                 newFragment = new FragmentRooms();
+                                newFragment = new FragmentRooms();
                             }
 
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -159,29 +217,27 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
 
 
 
-        if (findViewById(R.id.fragment_container) != null) {
 
-            // However, if we're being restored from a previous state,
-            // then we don't need to do anything and should return or else
-            // we could end up with overlapping fragments.
-            if (savedInstanceState != null) {
-                return;
-            }
 
-            // Create a new Fragment to be placed in the activity layout
+        // Create a new Fragment to be placed in the activity layout
+    }
+    void showFrontPage(){
             FragmentFrontPage firstFragment = new FragmentFrontPage();
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
             firstFragment.setArguments(getIntent().getExtras());
+            getFragmentManager().beginTransaction().add(R.id.fragment_container,firstFragment).commit();
+    }
+    void showLoginDialog() {
+        // Create a new Fragment to be placed in the activity layout
+        DialogLogin loginFragment = new DialogLogin();
 
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getFragmentManager().beginTransaction().add(R.id.fragment_container,new FragmentFrontPage()).commit();
-        }
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+        loginFragment.setArguments(getIntent().getExtras());
 
+        // Add the fragment to the 'fragment_container' FrameLayout
+        getFragmentManager().beginTransaction().add(R.id.fragment_container,loginFragment).commit();
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -197,26 +253,10 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
         switch (id) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
-            case R.id.action_create_post:
-                // Create new fragment and transaction
-                Fragment newFragment = new CreatePostFragment();
-                FragmentTransaction transaction =getFragmentManager().beginTransaction();
-
-                // Replace whatever is in the fragment_container view with this fragment,
-                // and add the transaction to the back stack
-                transaction.replace(R.id.fragment_container, newFragment);
-                // transaction.addToBackStack();
-
-                // Commit the transaction
-                transaction.commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -228,7 +268,11 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
         if (result != null && result.isDrawerOpen()) {
             result.closeDrawer();
         } else {
-            super.onBackPressed();
+            if (getFragmentManager().getBackStackEntryCount() > 0 ){
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 

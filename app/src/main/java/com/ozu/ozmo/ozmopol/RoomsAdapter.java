@@ -75,7 +75,7 @@ public class RoomsAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Room room =mList.get(position);
-                    ((MyApplication) mContext.getApplication()).selectedRoomId=room.pkRoomId;
+                    ((MyApplication) mContext.getApplication()).selectedRoom=room;
 
                     // Create new fragment and transaction
                     Fragment newFragment = new FragmentRoomContent();
@@ -84,8 +84,8 @@ public class RoomsAdapter extends BaseAdapter {
                     // Replace whatever is in the fragment_container view with this fragment,
                     // and add the transaction to the back stack
 
-                    transaction.add(R.id.fragment_container,newFragment);
-
+                    transaction.replace(R.id.fragment_container,newFragment);
+                    transaction.addToBackStack("FragmentRooms");
                     // Commit the transaction
                     transaction.commit();
 

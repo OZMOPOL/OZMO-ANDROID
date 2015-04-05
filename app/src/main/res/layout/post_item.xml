@@ -92,8 +92,21 @@
                         android:textColor="@color/line_color"
                         android:textSize="13dp"
                         android:text="aminD"/>
-
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="13dp"
+                        android:text="at"/>
+                    <TextView
+                        android:id="@+id/tv_createDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textColor="@color/line_color"
+                        android:textSize="13dp"
+                        android:text="2015"/>
 
                     </LinearLayout>
 
@@ -123,6 +136,7 @@
             <ImageButton
                 android:layout_width="40dp"
                 android:paddingLeft="5dp"
+                android:paddingRight="10dp"
                 android:layout_height="fill_parent"
                 android:background="@null"
                 android:layout_weight="0"

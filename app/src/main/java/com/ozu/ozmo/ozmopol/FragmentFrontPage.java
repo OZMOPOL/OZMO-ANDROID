@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import android.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,9 @@ public class FragmentFrontPage extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
         addSwipeRefreshFunction();
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();

@@ -21,6 +21,28 @@
             android:layout_centerVertical="true"
             wheel:matProg_barColor="#5588FF"
             wheel:matProg_progressIndeterminate="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="50dp"
+            android:paddingBottom="20dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="This room has no posts, wanna create a post? :D"
+            android:id="@+id/tv_empty_room"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create A Post"
+            android:textColor="@color/whiteColor"
+            android:background="@color/md_green_600"
+            android:padding="10dp"
+            android:id="@+id/btn_create_post"
+            android:layout_gravity="right" />
+
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/room_content_swipe_container"

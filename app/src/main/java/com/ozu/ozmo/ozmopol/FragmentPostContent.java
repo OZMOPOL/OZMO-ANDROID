@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,7 +82,6 @@ public class FragmentPostContent extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         String postId=((MyApplication) getActivity().getApplication()).selectedPostId;
 
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.fragment_post_content_swipe_container);

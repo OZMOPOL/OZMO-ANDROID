@@ -1,12 +1,30 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.ozu.ozmo.ozmopol.Models.OzmoService;
+import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Result;
+import com.ozu.ozmo.ozmopol.Models.Room;
+
+import java.util.UUID;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
@@ -106,4 +124,58 @@ public class CreatePostFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+
+        Button btn=(Button)view.findViewById(R.id.fragment_create_post_submit_post);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+                OzmoService service = restAdapter.create(OzmoService.class);
+
+
+                Post toPost=new Post();
+                String postTitle=((EditText)getView().findViewById(R.id.fragment_create_post_title)).getText().toString();
+                String postContent=((EditText)getView().findViewById(R.id.fragment_create_post_content)).getText().toString();
+                toPost.postTitle=postTitle;
+                toPost.postContent=postContent;
+                toPost.fkPostUserId=((MyApplication) getActivity().getApplication()).user;
+                RandomString randomString=new RandomString(30);
+                toPost.pkPostId = randomString.nextString();
+                toPost.fkPostRoomId=((MyApplication) getActivity().getApplication()).selectedRoom;
+
+                service.createPost(toPost,new Callback<Result>() {
+                    @Override
+                    public void success(Result result, Response response) {
+                        if (result.title.equalsIgnoreCase("OK")){
+                            Toast.makeText(getActivity().getApplicationContext(), "Successfully Posted !", Toast.LENGTH_SHORT).show();
+                            Fragment newFragment = new FragmentRoomContent();
+                            FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container,newFragment);
+                            transaction.addToBackStack("FragmentRooms");
+                            // Commit the transaction
+                            transaction.commit();
+
+                        }else {
+                            Toast.makeText(getActivity().getApplicationContext(),result.details, Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getActivity().getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+        });
+
+
+    }
 }

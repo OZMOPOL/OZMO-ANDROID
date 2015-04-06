@@ -76,7 +76,6 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
 
-
         boolean loggedIn= prefs.getBoolean("loggedIn",false);
         if (loggedIn){
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();

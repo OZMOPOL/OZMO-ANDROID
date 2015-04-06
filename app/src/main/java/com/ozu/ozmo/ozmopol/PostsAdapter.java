@@ -98,7 +98,7 @@ public class PostsAdapter extends BaseAdapter {
             vh.voteCount.setText(post.voteCount);
             vh.postUserName.setText(post.fkPostUserId.userName);
             vh.postCDate.setText(post.postCDate);
-            vh.room.setText(post.fkPostRoomId.pkRoomId);
+            vh.room.setText(post.fkPostRoomId.roomTitle);
 
             final Vote vote = post.vote;
             if(vote!=null){

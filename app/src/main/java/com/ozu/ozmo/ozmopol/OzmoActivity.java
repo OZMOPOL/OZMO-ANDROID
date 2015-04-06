@@ -87,6 +87,7 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
                 public void success(User user, Response response) {
                     // Logged in
                     ((MyApplication) getApplication()).user=user;
+                    showFrontPage();
                 }
 
                 @Override
@@ -96,7 +97,7 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
             });
 
 
-            showFrontPage();
+
         }else{
             getSupportActionBar().hide();
             showLoginDialog();

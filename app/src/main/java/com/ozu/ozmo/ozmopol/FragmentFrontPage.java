@@ -17,6 +17,7 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.ozu.ozmo.ozmopol.Models.Contributor;
 import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.User;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -44,15 +45,22 @@ public class FragmentFrontPage extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
         addSwipeRefreshFunction();
+        refreshTheFrontPage();
+
+
+
+
+    }
+    void refreshTheFrontPage(){
+        User user=((MyApplication)getActivity().getApplication()).user;
+
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
         OzmoService service = restAdapter.create(OzmoService.class);
         final List<Post> myPostCards=new ArrayList<Post>();
 
-        service.getFrontPagePosts(new Callback<List<Post>>() {
+        service.getFrontPagePosts(user, new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
                 myPostCards.addAll(posts);
@@ -70,9 +78,7 @@ public class FragmentFrontPage extends Fragment {
             }
         });
 
-
     }
-
     public void addSwipeRefreshFunction(){ //functionality to be set
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -80,6 +86,7 @@ public class FragmentFrontPage extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
                         swipeLayout.setRefreshing(false);
+                        refreshTheFrontPage();
                     }
                 }, 5000);
             }

@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,21 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Result;
+import com.ozu.ozmo.ozmopol.Models.Vote;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by amind on 3/9/15.
@@ -81,13 +91,83 @@ public class PostsAdapter extends BaseAdapter {
 
 
 
-            Post post=mList.get(position);
+            final Post post=mList.get(position);
             vh.postTitle.setText(post.postTitle);
             vh.postContent.setText(post.postContent);
             vh.voteCount.setText(post.voteCount);
             vh.postUserName.setText(post.fkPostUserId.userName);
             vh.postCDate.setText(post.postCDate);
 
+            Vote vote = post.vote;
+            if(vote!=null){
+                if (vote.voteValue){
+                    vh.voteUpButton.setBackgroundColor(Color.parseColor("#A4E786"));
+
+                }else{
+                    vh.voteDownButton.setBackgroundColor(Color.parseColor("#FF4981"));
+                }
+            }
+
+            vh.voteUpButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+                    OzmoService service = restAdapter.create(OzmoService.class);
+                    Vote myVote=new Vote();
+                    myVote.voteValue=true;
+                    myVote.fkVotePostId=post;
+                    myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+                    RandomString randomString=new RandomString(30);
+                    myVote.pkVoteId=randomString.nextString();
+
+                    service.createVote(myVote,new Callback<Result>() {
+                        @Override
+                        public void success(Result result, Response response) {
+                            if (result.title.equalsIgnoreCase("OK")){
+                                Toast.makeText(mContext.getApplicationContext(), "Your vote has successfully posted !", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(mContext.getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+            });
+            vh.voteDownButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+                    OzmoService service = restAdapter.create(OzmoService.class);
+                    Vote myVote=new Vote();
+                    myVote.voteValue=false;
+                    myVote.fkVotePostId=post;
+                    myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+                    RandomString randomString=new RandomString(30);
+                    myVote.pkVoteId=randomString.nextString();
+
+                    service.createVote(myVote,new Callback<Result>() {
+                        @Override
+                        public void success(Result result, Response response) {
+                            if (result.title.equalsIgnoreCase("OK")){
+                                Toast.makeText(mContext.getApplicationContext(), "Your vote has successfully posted !", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(mContext.getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+            });
             if (post.postTitle==null){
                 vh.votesLayer.setVisibility(View.GONE);
                 vh.goToPostButton.setVisibility(View.GONE);

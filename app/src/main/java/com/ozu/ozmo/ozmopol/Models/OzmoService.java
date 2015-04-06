@@ -15,8 +15,8 @@ import retrofit.http.Path;
  */
 public interface OzmoService {
 
-    @GET("/Ozmopol/webresources/entities.post/getFrontPage")
-    void getFrontPagePosts(Callback<List<Post>> cb);
+    @POST("/Ozmopol/webresources/entities.post/getFrontPage")
+    void getFrontPagePosts(@Body User user, Callback<List<Post>> cb);
 
     @GET("/Ozmopol/webresources/entities.post/getRoomContents/{id}")
     void getRoomContents(@Path("id") String roomId,Callback<List<Post>> cb);
@@ -34,6 +34,12 @@ public interface OzmoService {
     @POST("/Ozmopol/webresources/entities.post/createPost")
     void createPost(@Body Post post, Callback<Result> cb);
 
+
+    @POST("/Ozmopol/webresources/entities.vote/createVote")
+    void createVote(@Body Vote vote, Callback<Result> cb);
+
+    @POST("/Ozmopol/webresources/entities.vote/editVote")
+    void editVote(@Body Vote vote, Callback<Result> cb);
 
     @POST("/Ozmopol/webresources/entities.user/signUp")
     void signUp(@Body User user, Callback<Result> cb);

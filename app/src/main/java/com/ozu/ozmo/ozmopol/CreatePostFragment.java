@@ -147,6 +147,8 @@ public class CreatePostFragment extends Fragment {
                 RandomString randomString=new RandomString(30);
                 toPost.pkPostId = randomString.nextString();
                 toPost.fkPostRoomId=((MyApplication) getActivity().getApplication()).selectedRoom;
+                toPost.postEDate="2015-03-28T20:04:05+02:00";
+                toPost.postCDate="2015-03-28T20:04:05+02:00";
 
                 service.createPost(toPost,new Callback<Result>() {
                     @Override

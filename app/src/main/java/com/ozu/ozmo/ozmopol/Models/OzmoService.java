@@ -4,10 +4,12 @@ import java.util.List;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 
 /**
@@ -18,8 +20,8 @@ public interface OzmoService {
     @POST("/Ozmopol/webresources/entities.post/getFrontPage")
     void getFrontPagePosts(@Body User user, Callback<List<Post>> cb);
 
-    @GET("/Ozmopol/webresources/entities.post/getRoomContents/{id}")
-    void getRoomContents(@Path("id") String roomId,Callback<List<Post>> cb);
+    @GET("/Ozmopol/webresources/entities.post/getRoomContents/{id}/user/{userId}")
+    void getRoomContents(@Path("id") String roomId,@Path("userId") String userId,Callback<List<Post>> cb);
 
 
     @GET("/Ozmopol/webresources/entities.post/getPostContents/{id}")
@@ -38,8 +40,11 @@ public interface OzmoService {
     @POST("/Ozmopol/webresources/entities.vote/createVote")
     void createVote(@Body Vote vote, Callback<Result> cb);
 
-    @POST("/Ozmopol/webresources/entities.vote/editVote")
+    @PUT("/Ozmopol/webresources/entities.vote/editVote")
     void editVote(@Body Vote vote, Callback<Result> cb);
+
+    @DELETE("/Ozmopol/webresources/entities.vote/{id}")
+    void removeVote(@Path("id") String id, Callback<Result> cb);
 
     @POST("/Ozmopol/webresources/entities.user/signUp")
     void signUp(@Body User user, Callback<Result> cb);

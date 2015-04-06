@@ -98,7 +98,7 @@ public class PostsAdapter extends BaseAdapter {
             vh.postUserName.setText(post.fkPostUserId.userName);
             vh.postCDate.setText(post.postCDate);
 
-            Vote vote = post.vote;
+            final Vote vote = post.vote;
             if(vote!=null){
                 if (vote.voteValue){
                     vh.voteUpButton.setBackgroundColor(Color.parseColor("#A4E786"));
@@ -111,61 +111,25 @@ public class PostsAdapter extends BaseAdapter {
             vh.voteUpButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-                    OzmoService service = restAdapter.create(OzmoService.class);
-                    Vote myVote=new Vote();
-                    myVote.voteValue=true;
-                    myVote.fkVotePostId=post;
-                    myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
-                    RandomString randomString=new RandomString(30);
-                    myVote.pkVoteId=randomString.nextString();
+                    if (vote==null)
+                         upVote(post);
+                    else if (vote.voteValue == false)
+                        editUpVote(post,vote);
+                    else
+                        editUnVote(post,vote);
 
-                    service.createVote(myVote,new Callback<Result>() {
-                        @Override
-                        public void success(Result result, Response response) {
-                            if (result.title.equalsIgnoreCase("OK")){
-                                Toast.makeText(mContext.getApplicationContext(), "Your vote has successfully posted !", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
-                            }
-                        }
 
-                        @Override
-                        public void failure(RetrofitError error) {
-                            Toast.makeText(mContext.getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
                 }
             });
             vh.voteDownButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-                    OzmoService service = restAdapter.create(OzmoService.class);
-                    Vote myVote=new Vote();
-                    myVote.voteValue=false;
-                    myVote.fkVotePostId=post;
-                    myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
-                    RandomString randomString=new RandomString(30);
-                    myVote.pkVoteId=randomString.nextString();
-
-                    service.createVote(myVote,new Callback<Result>() {
-                        @Override
-                        public void success(Result result, Response response) {
-                            if (result.title.equalsIgnoreCase("OK")){
-                                Toast.makeText(mContext.getApplicationContext(), "Your vote has successfully posted !", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void failure(RetrofitError error) {
-                            Toast.makeText(mContext.getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
+                    if (vote==null)
+                        downVote(post);
+                    else if (vote.voteValue==true)
+                        editDownVote(post,vote);
+                    else
+                        editUnVote(post,vote);
                 }
             });
             if (post.postTitle==null){
@@ -201,7 +165,148 @@ public class PostsAdapter extends BaseAdapter {
 
         return convertView;
     }
+    void refreshPage(){
+        Fragment newFragment = new FragmentFrontPage();
+        FragmentTransaction transaction =mContext.getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container,newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    void upVote(Post post){
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+        OzmoService service = restAdapter.create(OzmoService.class);
+        Vote myVote=new Vote();
+        myVote.voteValue=true;
+        myVote.fkVotePostId=post;
+        myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+        RandomString randomString=new RandomString(30);
+        myVote.pkVoteId=randomString.nextString();
 
+        service.createVote(myVote,new Callback<Result>() {
+            @Override
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    Toast.makeText(mContext.getApplicationContext(), "Your vote posted successfully !", Toast.LENGTH_SHORT).show();
+                    refreshPage();
+                }else{
+                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(mContext.getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    void downVote(Post post){
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+        OzmoService service = restAdapter.create(OzmoService.class);
+        Vote myVote=new Vote();
+        myVote.voteValue=false;
+        myVote.fkVotePostId=post;
+        myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+        RandomString randomString=new RandomString(30);
+        myVote.pkVoteId=randomString.nextString();
+
+        service.createVote(myVote,new Callback<Result>() {
+            @Override
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    Toast.makeText(mContext.getApplicationContext(), "Your vote posted successfully !", Toast.LENGTH_SHORT).show();
+                    refreshPage();
+
+                }else{
+                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(mContext.getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    void editUpVote(Post post,Vote myVote){
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+        OzmoService service = restAdapter.create(OzmoService.class);
+
+        myVote.voteValue=true;
+        myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+
+        service.editVote(myVote,new Callback<Result>() {
+            @Override
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    Toast.makeText(mContext.getApplicationContext(), "Your vote edited successfully !", Toast.LENGTH_SHORT).show();
+                    refreshPage();
+
+                }else{
+                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(mContext.getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    void editDownVote(Post post,Vote myVote){
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+        OzmoService service = restAdapter.create(OzmoService.class);
+
+        myVote.voteValue=false;
+        myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+
+        service.editVote(myVote,new Callback<Result>() {
+            @Override
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    Toast.makeText(mContext.getApplicationContext(), "Your vote edited successfully !", Toast.LENGTH_SHORT).show();
+                    refreshPage();
+
+                }else{
+                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(mContext.getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    void editUnVote(Post post,Vote myVote){
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
+        OzmoService service = restAdapter.create(OzmoService.class);
+
+        myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
+
+        service.removeVote(myVote.pkVoteId,new Callback<Result>() {
+            @Override
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    Toast.makeText(mContext.getApplicationContext(), "Your vote removed !", Toast.LENGTH_SHORT).show();
+                    refreshPage();
+
+                }else{
+                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(mContext.getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
     //added on 17.03.2015 - 16.59
     //where should those functions be run at, in order to
     //give functionality to the elements of

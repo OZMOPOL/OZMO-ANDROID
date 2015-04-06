@@ -1,5 +1,6 @@
 package com.ozu.ozmo.ozmopol;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -47,9 +48,9 @@ public class FragmentFrontPage extends Fragment {
 
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
         addSwipeRefreshFunction();
+
+
         refreshTheFrontPage();
-
-
 
 
     }
@@ -70,6 +71,7 @@ public class FragmentFrontPage extends Fragment {
                 updateColumnCountForFrontPage();
                 ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
                 progressWheel.setVisibility(View.GONE);
+
             }
 
             @Override
@@ -86,7 +88,13 @@ public class FragmentFrontPage extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override public void run() {
                         swipeLayout.setRefreshing(false);
-                        refreshTheFrontPage();
+
+
+                        Fragment newFragment = new FragmentFrontPage();
+                        FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_container,newFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
                     }
                 }, 5000);
             }

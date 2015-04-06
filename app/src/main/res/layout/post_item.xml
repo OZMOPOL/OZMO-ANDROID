@@ -107,6 +107,21 @@
                         android:textColor="@color/line_color"
                         android:textSize="13dp"
                         android:text="2015"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textColor="@color/text_gray_color"
+                        android:textSize="13dp"
+                        android:text="From"/>
+                    <TextView
+                        android:id="@+id/tv_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:textColor="@color/line_color"
+                        android:textSize="13dp"
+                        android:text="that room"/>
 
                     </LinearLayout>
 

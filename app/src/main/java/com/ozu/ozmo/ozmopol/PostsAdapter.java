@@ -40,7 +40,7 @@ public class PostsAdapter extends BaseAdapter {
     int votes; //the vote count to be received from the server
 
     static class PostCardViewHolder {
-        TextView voteCount, postTitle, postContent,postUserName,postCDate;
+        TextView voteCount, postTitle, postContent,postUserName,postCDate,room;
         ImageButton voteUpButton, voteDownButton, goToPostButton;
         LinearLayout votesLayer;
 
@@ -88,6 +88,7 @@ public class PostsAdapter extends BaseAdapter {
             vh.votesLayer=(LinearLayout)convertView.findViewById(R.id.votes_layout);
             vh.voteDownButton=(ImageButton)convertView.findViewById(R.id.tv_vote_down);
             vh.voteUpButton=(ImageButton)convertView.findViewById(R.id.tv_vote_up);
+            vh.room=(TextView)convertView.findViewById(R.id.tv_room);
 
 
 
@@ -97,6 +98,7 @@ public class PostsAdapter extends BaseAdapter {
             vh.voteCount.setText(post.voteCount);
             vh.postUserName.setText(post.fkPostUserId.userName);
             vh.postCDate.setText(post.postCDate);
+            vh.room.setText(post.fkPostRoomId.pkRoomId);
 
             final Vote vote = post.vote;
             if(vote!=null){

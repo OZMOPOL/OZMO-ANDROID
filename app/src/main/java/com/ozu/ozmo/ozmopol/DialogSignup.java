@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ozu.ozmo.ozmopol.Models.OzmoService;
@@ -36,6 +37,8 @@ import retrofit.client.Response;
 public class DialogSignup extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    LinearLayout form_layout,confirmation_layout;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -126,6 +129,18 @@ public class DialogSignup extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        form_layout=(LinearLayout)getView().findViewById(R.id.form_layout);
+        confirmation_layout=(LinearLayout)getView().findViewById(R.id.confrimation_layout);
+
+        Button btn_confirm=(Button)getView().findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // CALL SERVICE TO CHECK IF THE CODE IS OK ! AND THEN GO TO LOGIN PAGE
+            }
+        });
+
         final Button btnSignup=(Button)getView().findViewById(R.id.btn_signup);
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,14 +172,16 @@ public class DialogSignup extends Fragment {
                     @Override
                     public void success(Result result, Response response) {
                         if (result.title.equalsIgnoreCase("OK")){
-                            Toast.makeText(getActivity().getApplicationContext(), "You have successgully signed up !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
 
-                            Fragment newFragment = new DialogLogin();
-                            FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment_container,newFragment);
-                            transaction.addToBackStack("DialogSignup");
-                            // Commit the transaction
-                            transaction.commit();
+                            form_layout.setVisibility(View.GONE);
+                            confirmation_layout.setVisibility(View.VISIBLE);
+//                            Fragment newFragment = new DialogLogin();
+//                            FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
+//                            transaction.replace(R.id.fragment_container,newFragment);
+//                            transaction.addToBackStack("DialogSignup");
+//                            // Commit the transaction
+//                            transaction.commit();
 
 
                         }else{

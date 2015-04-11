@@ -122,17 +122,24 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
                         profile,
                         //don't ask but google uses 14dp for the add account icon in gmail but 20dp for the normal icons (like manage account)
                         // new ProfileSettingDrawerItem().withName("Add Account").withDescription("Add new Account").withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_add).actionBarSize().paddingDp(5).colorRes(R.color.material_drawer_primary_text)).withIdentifier(PROFILE_SETTING),
-                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings)
+                        new ProfileSettingDrawerItem().withName("Manage Account").withIcon(GoogleMaterial.Icon.gmd_settings),
+                        new ProfileSettingDrawerItem().withName("Log out").withIcon(GoogleMaterial.Icon.gmd_exit_to_app).withIdentifier(1)
                 )
-//                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
-//                    @Override
-//                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-//                        //sample usage of the onProfileChanged listener
-//                        //if the clicked item has the identifier 1 add a new profile ;)
-//                        //false if you have not consumed the event and it should close the drawer
-//                        return false;
-//                    }
-//                })
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean current) {
+
+                        ((MyApplication) getApplication()).user=null;
+                        SharedPreferences prefs = getSharedPreferences(
+                                "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
+
+                        prefs.edit().putBoolean("loggedIn", false).apply();
+                        prefs.edit().putString("userName", "").apply();
+                        getSupportActionBar().hide();
+                        showLoginDialog();
+                        return false;
+                    }
+                })
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -235,7 +242,7 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
         loginFragment.setArguments(getIntent().getExtras());
 
         // Add the fragment to the 'fragment_container' FrameLayout
-        getFragmentManager().beginTransaction().add(R.id.fragment_container,loginFragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container,loginFragment).commit();
 
     }
 

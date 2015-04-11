@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +85,7 @@ public class PostsAdapter extends BaseAdapter {
             vh.voteCount= (TextView)convertView.findViewById(R.id.tv_votes);
             vh.postUserName = (TextView) convertView.findViewById(R.id.tv_user);
             vh.postCDate = (TextView) convertView.findViewById(R.id.tv_createDate);
-            vh.goToPostButton=(ImageButton) convertView.findViewById(R.id.tv_go2post);
+            //vh.goToPostButton=(ImageButton) convertView.findViewById(R.id.tv_go2post);
             vh.votesLayer=(LinearLayout)convertView.findViewById(R.id.votes_layout);
             vh.voteDownButton=(ImageButton)convertView.findViewById(R.id.tv_vote_down);
             vh.voteUpButton=(ImageButton)convertView.findViewById(R.id.tv_vote_up);
@@ -99,6 +100,7 @@ public class PostsAdapter extends BaseAdapter {
             vh.postUserName.setText(post.fkPostUserId.userName);
             vh.postCDate.setText(post.postCDate);
             vh.room.setText(post.fkPostRoomId.roomTitle);
+
 
             final Vote vote = post.vote;
             if(vote!=null){
@@ -309,6 +311,8 @@ public class PostsAdapter extends BaseAdapter {
         });
 
     }
+
+
     //added on 17.03.2015 - 16.59
     //where should those functions be run at, in order to
     //give functionality to the elements of

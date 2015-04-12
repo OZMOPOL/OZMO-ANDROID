@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:textColor="@color/text_gray_color"
-                        android:textSize="13dp"
+                        android:textSize="10dp"
                         android:text="created by"/>
                     <TextView
                         android:id="@+id/tv_user"
@@ -90,14 +90,14 @@
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:textColor="@color/line_color"
-                        android:textSize="13dp"
+                        android:textSize="10dp"
                         android:text="aminD"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:textColor="@color/text_gray_color"
-                        android:textSize="13dp"
+                        android:textSize="10dp"
                         android:text="at"/>
                     <TextView
                         android:id="@+id/tv_createDate"
@@ -105,27 +105,34 @@
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:textColor="@color/line_color"
-                        android:textSize="13dp"
+                        android:textSize="10dp"
                         android:text="2015"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:textColor="@color/text_gray_color"
-                        android:textSize="13dp"
+                        android:textSize="10dp"
                         android:text="From"/>
+
                     <TextView
                         android:id="@+id/tv_room"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="2dp"
                         android:textColor="@color/line_color"
-                        android:textSize="13dp"
+                        android:textSize="10dp"
                         android:text="that room"/>
-
-                    </LinearLayout>
-
-
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_post_title"
@@ -134,7 +141,7 @@
                     android:padding="2dp"
                     android:textColor="@color/title_color"
                     android:textSize="17dp"
-                    android:text="Post Title comes here for showing (it should have limited characters?"/>
+                    android:text="Post Title"/>
 
 
 

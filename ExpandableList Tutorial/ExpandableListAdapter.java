@@ -36,9 +36,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public Post getChild(Post mainPost, int commentPosition) {
         return mainPost.comments.get(commentPosition);
-    }
-
-    public View getChildView(Post mainPost, int commentPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        
+    }public View getChildView(Post mainPost, int commentPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = getPostTitle(getChild(mainPost, commentPosition));
 
@@ -51,9 +50,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         txtListChild.setText(childText);
         return convertView;
-    }
-
-    public View getGroupView(Post mainPost, int groupId, boolean isExpanded, View convertView, ViewGroup parent) {
+        
+    }public View getGroupView(Post mainPost, int groupId, boolean isExpanded, View convertView, ViewGroup parent) {
 
         String headerTitle = getPostTitle(mainPost);
 

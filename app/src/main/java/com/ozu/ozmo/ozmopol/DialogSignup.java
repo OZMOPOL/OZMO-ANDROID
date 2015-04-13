@@ -166,9 +166,8 @@ public class DialogSignup extends Fragment {
                 user.userEmail=userEmail;
                 user.userStatus="1";
 
-                RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-                OzmoService service = restAdapter.create(OzmoService.class);
-                service.signUp(user,new Callback<Result>() {
+
+                ((MyApplication) getActivity().getApplication()).ozmoService().signUp(user,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
                         if (result.title.equalsIgnoreCase("OK")){

@@ -134,8 +134,6 @@ public class CreatePostFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-                OzmoService service = restAdapter.create(OzmoService.class);
 
 
                 Post toPost=new Post();
@@ -150,7 +148,7 @@ public class CreatePostFragment extends Fragment {
                 toPost.postEDate="2015-03-28T20:04:05+02:00";
                 toPost.postCDate="2015-03-28T20:04:05+02:00";
 
-                service.createPost(toPost,new Callback<Result>() {
+                ((MyApplication) getActivity().getApplication()).ozmoService().createPost(toPost,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
                         if (result.title.equalsIgnoreCase("OK")){

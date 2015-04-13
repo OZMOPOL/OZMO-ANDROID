@@ -80,13 +80,10 @@ public class FragmentRooms extends Fragment {
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
         addSwipeRefreshFunction();
         final List<Room> myCards = new ArrayList<Room>();
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://10.100.92.22:8080")
-                .build();
 
-        OzmoService service = restAdapter.create(OzmoService.class);
 
-        service.getRooms(new Callback<List<Room>>() {
+
+        ((MyApplication) getActivity().getApplication()).ozmoService().getRooms(new Callback<List<Room>>() {
             @Override
             public void success(List<Room> rooms, Response response) {
                 myCards.addAll(rooms);

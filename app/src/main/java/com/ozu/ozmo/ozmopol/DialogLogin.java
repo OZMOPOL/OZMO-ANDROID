@@ -136,15 +136,14 @@ public class DialogLogin extends DialogFragment {
                 final String userName=((EditText)getView().findViewById(R.id.tv_username)).getText().toString();
                 String password=((EditText)getView().findViewById(R.id.tv_password)).getText().toString();
 
-                RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-                final OzmoService service = restAdapter.create(OzmoService.class);
 
-                service.checkLogin(userName,password,new Callback<Result>() {
+
+                ((MyApplication) getActivity().getApplication()).ozmoService().checkLogin(userName,password,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
                         if (result.title.equalsIgnoreCase("OK")){
 
-                            service.getUserByUserName(userName,new Callback<User>() {
+                            ((MyApplication) getActivity().getApplication()).ozmoService().getUserByUserName(userName,new Callback<User>() {
                                 @Override
                                 public void success(User user, Response response) {
                                     ((MyApplication) getActivity().getApplication()).user=user;

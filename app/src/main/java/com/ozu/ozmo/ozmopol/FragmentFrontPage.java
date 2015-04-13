@@ -57,11 +57,10 @@ public class FragmentFrontPage extends Fragment {
     void refreshTheFrontPage(){
         User user=((MyApplication)getActivity().getApplication()).user;
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
+
         final List<Post> myPostCards=new ArrayList<Post>();
 
-        service.getFrontPagePosts(user, new Callback<List<Post>>() {
+        ((MyApplication) getActivity().getApplication()).ozmoService().getFrontPagePosts(user, new Callback<List<Post>>() {
             @Override
             public void success(List<Post> posts, Response response) {
                 myPostCards.addAll(posts);

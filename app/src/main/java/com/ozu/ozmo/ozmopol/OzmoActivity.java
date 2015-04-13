@@ -78,10 +78,10 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
 
         boolean loggedIn= prefs.getBoolean("loggedIn",false);
         if (loggedIn){
-            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-            OzmoService service = restAdapter.create(OzmoService.class);
+
+
             String userName=prefs.getString("userName","");
-            service.getUserByUserName(userName,new Callback<User>() {
+            ((MyApplication) getApplication()).ozmoService().getUserByUserName(userName,new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
                     // Logged in

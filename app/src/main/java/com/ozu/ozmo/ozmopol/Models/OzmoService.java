@@ -15,45 +15,51 @@ import retrofit.http.Path;
 /**
  * Created by amind on 3/21/15.
  */
-public interface OzmoService {
 
-    @POST("/Ozmopol/webresources/entities.post/getFrontPage")
+public interface OzmoService {
+    public static final String base_url="http://10.100.92.30:8080/";
+    static final String details_url="ozmoPol_WS_GF3/resources/";
+
+    static final String post_url="entities.post/";
+    static final String vote_url="entities.vote/";
+    static final String room_url="entities.room/";
+    static final String user_url="entities.user/";
+
+    @POST(details_url + post_url + "getFrontPage")
     void getFrontPagePosts(@Body User user, Callback<List<Post>> cb);
 
-    @GET("/Ozmopol/webresources/entities.post/getRoomContents/{id}/user/{userId}")
+    @GET(details_url+ post_url +"getRoomContents/{id}/user/{userId}")
     void getRoomContents(@Path("id") String roomId,@Path("userId") String userId,Callback<List<Post>> cb);
 
 
-    @GET("/Ozmopol/webresources/entities.post/getPostContents/{id}")
+    @GET(details_url+ post_url +"getPostContents/{id}")
     void getPostContents(@Path("id") String postId,Callback<Post> cb);
 
-    @GET("/Ozmopol/webresources/entities.user/checkLogin/{user}/pass/{pass}")
+    @GET(details_url+ post_url +"checkLogin/{user}/pass/{pass}")
     void checkLogin(@Path("user") String user,@Path("pass") String pass, Callback<Result> cb);
 
-    @GET("/Ozmopol/webresources/entities.user/getUserByUserName/{userName}")
+    @GET(details_url+ post_url +"getUserByUserName/{userName}")
     void getUserByUserName(@Path("userName") String userName, Callback<User> cb);
 
-    @POST("/Ozmopol/webresources/entities.post/createPost")
+    @POST(details_url+ post_url +"createPost")
     void createPost(@Body Post post, Callback<Result> cb);
 
 
-    @POST("/Ozmopol/webresources/entities.vote/createVote")
+    @POST(details_url + vote_url +"createVote")
     void createVote(@Body Vote vote, Callback<Result> cb);
 
-    @PUT("/Ozmopol/webresources/entities.vote/editVote")
+    @PUT(details_url + vote_url + "editVote")
     void editVote(@Body Vote vote, Callback<Result> cb);
 
-    @DELETE("/Ozmopol/webresources/entities.vote/{id}")
+    @DELETE(details_url+ vote_url + "{id}")
     void removeVote(@Path("id") String id, Callback<Result> cb);
 
-    @POST("/Ozmopol/webresources/entities.user/signUp")
+    @POST(details_url + user_url + "signUpVal/newUser")
     void signUp(@Body User user, Callback<Result> cb);
 
-    @Headers("Accept: application/json")
-    @GET("/Ozmopol/webresources/entities.room")
+
+    @GET(details_url+"entities.room")
     void getRooms(Callback<List<Room>> cb);
 
-//    @Headers("Accept: application/json")
-//    @GET("/ozmoPol_WebSrv/resources/ozmopol.post")
-//    void getPosts(Callback<List<Post>> cb);
+    
 }

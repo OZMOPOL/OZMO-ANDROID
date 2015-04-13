@@ -138,7 +138,7 @@ public class PostsAdapter extends BaseAdapter {
             });
             if (post.postTitle==null){
                 vh.votesLayer.setVisibility(View.GONE);
-                vh.goToPostButton.setVisibility(View.GONE);
+                //vh.goToPostButton.setVisibility(View.GONE);
             }
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -177,8 +177,7 @@ public class PostsAdapter extends BaseAdapter {
         transaction.commit();
     }
     void upVote(Post post){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
+
         Vote myVote=new Vote();
         myVote.voteValue=true;
         myVote.fkVotePostId=post;
@@ -186,7 +185,7 @@ public class PostsAdapter extends BaseAdapter {
         RandomString randomString=new RandomString(30);
         myVote.pkVoteId=randomString.nextString();
 
-        service.createVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).ozmoService().createVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -205,8 +204,7 @@ public class PostsAdapter extends BaseAdapter {
         });
     }
     void downVote(Post post){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
+
         Vote myVote=new Vote();
         myVote.voteValue=false;
         myVote.fkVotePostId=post;
@@ -214,7 +212,7 @@ public class PostsAdapter extends BaseAdapter {
         RandomString randomString=new RandomString(30);
         myVote.pkVoteId=randomString.nextString();
 
-        service.createVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).ozmoService().createVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -234,13 +232,12 @@ public class PostsAdapter extends BaseAdapter {
         });
     }
     void editUpVote(Post post,Vote myVote){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
+
 
         myVote.voteValue=true;
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        service.editVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).ozmoService().editVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -260,13 +257,11 @@ public class PostsAdapter extends BaseAdapter {
         });
     }
     void editDownVote(Post post,Vote myVote){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
 
         myVote.voteValue=false;
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        service.editVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).ozmoService().editVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -286,12 +281,10 @@ public class PostsAdapter extends BaseAdapter {
         });
     }
     void editUnVote(Post post,Vote myVote){
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
 
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        service.removeVote(myVote.pkVoteId,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).ozmoService().removeVote(myVote.pkVoteId,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){

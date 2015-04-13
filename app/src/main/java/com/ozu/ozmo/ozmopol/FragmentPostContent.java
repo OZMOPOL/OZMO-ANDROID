@@ -86,11 +86,10 @@ public class FragmentPostContent extends Fragment {
 
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.fragment_post_content_swipe_container);
         addSwipeRefreshFunction();
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://10.100.92.22:8080").build();
-        OzmoService service = restAdapter.create(OzmoService.class);
+
         final List<Post> myPostCards=new ArrayList<Post>();
 
-        service.getPostContents(postId,new Callback<Post>() {
+        ((MyApplication) getActivity().getApplication()).ozmoService().getPostContents(postId,new Callback<Post>() {
             @Override
             public void success(Post post, Response response) {
 

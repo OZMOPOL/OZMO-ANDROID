@@ -1,5 +1,7 @@
 package com.ozu.ozmo.ozmopol.Models;
 
+import java.util.Date;
+
 /**
  * Created by amind on 4/5/15.
  */
@@ -9,5 +11,6 @@ public class User {
     public String userEmail;
     public String userName;
     public String userPass;
-    public String userStatus;
+    public Boolean userStatus;
+    public String useractHash;
 }

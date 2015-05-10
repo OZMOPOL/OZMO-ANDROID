@@ -4,9 +4,7 @@ package com.ozu.ozmo.ozmopol;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.Room;
 import com.ozu.ozmo.ozmopol.Models.User;
 import com.pnikosis.materialishprogress.ProgressWheel;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -69,33 +67,34 @@ public class FragmentRoomContent extends Fragment {
         final List<Post> myPostCards=new ArrayList<Post>();
 
 
-        ((MyApplication) getActivity().getApplication()).ozmoService().getRoomContents(room.pkRoomId,user.pkUserId,new Callback<List<Post>>() {
+        ((MyApplication) getActivity().getApplication()).getOzmoService().getRoomContents(room.pkRoomId, user.pkUserId, new Callback<Result>() {
             @Override
-            public void success(List<Post> posts, Response response) {
-
-                 myPostCards.addAll(posts);
-                 PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentRoomContent.this.getFragmentManager());
-                 gridView = (StaggeredGridView)getView().findViewById(R.id.room_content_grid_view);
-                 gridView.setAdapter(pAdapter);
-                 updateColumnCountForFrontPage();
-                 ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.room_content_progress_wheel);
-                 progressWheel.setVisibility(View.GONE);
-                if (posts.size()!=0){
-                    TextView tvEmptyRoom=(TextView)getView().findViewById(R.id.tv_empty_room);
-                    tvEmptyRoom.setVisibility(View.GONE);
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    List<Post> posts= (List<Post>)result.body;
+                    myPostCards.addAll(posts);
+                    PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentRoomContent.this.getFragmentManager());
+                    gridView = (StaggeredGridView)getView().findViewById(R.id.room_content_grid_view);
+                    gridView.setAdapter(pAdapter);
+                    updateColumnCountForFrontPage();
+                    ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.room_content_progress_wheel);
+                    progressWheel.setVisibility(View.GONE);
+                    if (posts.size()!=0){
+                        TextView tvEmptyRoom=(TextView)getView().findViewById(R.id.tv_empty_room);
+                        tvEmptyRoom.setVisibility(View.GONE);
+                    }
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+                Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
 
             }
         });
-
-
-
-
-
 
 
     }

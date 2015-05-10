@@ -4,6 +4,15 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent" tools:context="com.ozu.ozmo.ozmopol.FrontPageFragment"
     android:background="@color/whiteColor">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create A Room"
+        android:textColor="@color/whiteColor"
+        android:background="@color/md_green_600"
+        android:padding="10dp"
+        android:id="@+id/btn_create_room"
+        android:layout_gravity="right" />
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_container"

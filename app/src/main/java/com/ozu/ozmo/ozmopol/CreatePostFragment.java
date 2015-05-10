@@ -5,24 +5,17 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
 import com.ozu.ozmo.ozmopol.Models.Result;
-import com.ozu.ozmo.ozmopol.Models.Room;
-
-import java.util.UUID;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -148,20 +141,20 @@ public class CreatePostFragment extends Fragment {
                 toPost.postEDate="2015-03-28T20:04:05+02:00";
                 toPost.postCDate="2015-03-28T20:04:05+02:00";
 
-                ((MyApplication) getActivity().getApplication()).ozmoService().createPost(toPost,new Callback<Result>() {
+                ((MyApplication) getActivity().getApplication()).getOzmoService().createPost(toPost, new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
-                        if (result.title.equalsIgnoreCase("OK")){
+                        if (result.title.equalsIgnoreCase("OK")) {
                             Toast.makeText(getActivity().getApplicationContext(), "Successfully Posted !", Toast.LENGTH_SHORT).show();
                             Fragment newFragment = new FragmentRoomContent();
-                            FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment_container,newFragment);
+                            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, newFragment);
                             transaction.addToBackStack("FragmentRooms");
                             // Commit the transaction
                             transaction.commit();
 
-                        }else {
-                            Toast.makeText(getActivity().getApplicationContext(),result.details, Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
                         }
 
                     }

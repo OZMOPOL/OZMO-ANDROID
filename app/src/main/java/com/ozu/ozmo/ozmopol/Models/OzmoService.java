@@ -17,49 +17,72 @@ import retrofit.http.Path;
  */
 
 public interface OzmoService {
-    public static final String base_url="http://10.100.92.30:8080/";
-    static final String details_url="ozmoPol_WS_GF3/resources/";
+    public static final String base_url="http://10.100.92.28:8080";
+    static final String details_url="/ozmoPol_WS_GF3/resources";
 
-    static final String post_url="entities.post/";
-    static final String vote_url="entities.vote/";
-    static final String room_url="entities.room/";
-    static final String user_url="entities.user/";
+    static final String post_url="/com.ozmo.ent.ozpost";
+    static final String vote_url="/com.ozmo.ent.ozvote";
+    static final String room_url="/com.ozmo.ent.ozroom";
+    static final String user_url="/com.ozmo.ent.ozuser";
 
-    @POST(details_url + post_url + "getFrontPage")
-    void getFrontPagePosts(@Body User user, Callback<List<Post>> cb);
+    // Posts
+    @POST(details_url + user_url + "/uList")
+    void testSrv(Callback<Result> cb);
 
-    @GET(details_url+ post_url +"getRoomContents/{id}/user/{userId}")
-    void getRoomContents(@Path("id") String roomId,@Path("userId") String userId,Callback<List<Post>> cb);
+
+    @POST(details_url + post_url + "/getFrontPage")
+    void getFrontPagePosts(@Body User user, Callback<Result> cb);
+
+    @GET(details_url+ post_url +"/getRoomContents/{id}/user/{userId}")
+    void getRoomContents(@Path("id") String roomId,@Path("userId") String userId,Callback<Result> cb);
 
 
     @GET(details_url+ post_url +"getPostContents/{id}")
-    void getPostContents(@Path("id") String postId,Callback<Post> cb);
+    void getPostContents(@Path("id") String postId,Callback<Result> cb);
 
-    @GET(details_url+ post_url +"checkLogin/{user}/pass/{pass}")
-    void checkLogin(@Path("user") String user,@Path("pass") String pass, Callback<Result> cb);
 
-    @GET(details_url+ post_url +"getUserByUserName/{userName}")
-    void getUserByUserName(@Path("userName") String userName, Callback<User> cb);
-
-    @POST(details_url+ post_url +"createPost")
+    @POST(details_url+ post_url +"/createPost")
     void createPost(@Body Post post, Callback<Result> cb);
 
 
-    @POST(details_url + vote_url +"createVote")
+    // Votes
+    @POST(details_url + vote_url +"/createVote")
     void createVote(@Body Vote vote, Callback<Result> cb);
 
-    @PUT(details_url + vote_url + "editVote")
+    @PUT(details_url + vote_url + "/editVote")
     void editVote(@Body Vote vote, Callback<Result> cb);
 
     @DELETE(details_url+ vote_url + "{id}")
     void removeVote(@Path("id") String id, Callback<Result> cb);
 
-    @POST(details_url + user_url + "signUpVal/newUser")
+    //Users
+
+    @POST(details_url + user_url + "/signUpVal")
     void signUp(@Body User user, Callback<Result> cb);
 
+    @POST(details_url + user_url + "/verifyUser")
+    void verifyUser(@Body User user, Callback<Result> cb);
 
-    @GET(details_url+"entities.room")
-    void getRooms(Callback<List<Room>> cb);
+    @POST(details_url+ user_url +"/checkLogin")
+    void checkLogin(@Body User user, Callback<Result> cb);
 
-    
+    @GET(details_url+ user_url +"/getUserByUserName/{userName}")
+    void uProfile(@Path("userName") String userName, Callback<User> cb);
+
+
+    @POST(details_url+ user_url +"/sendActCode")
+    void sendActCode(@Body User user,Callback<Result> cb);
+
+    //Rooms
+
+    @POST(details_url+ room_url + "/createRoom" )
+    void createRoom(@Body Room room, Callback<Result> cb);
+
+
+    @GET(details_url+ room_url )
+    void getRooms(Callback<Result> cb);
+
+
+
+
 }

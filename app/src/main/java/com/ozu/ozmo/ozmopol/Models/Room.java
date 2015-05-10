@@ -8,5 +8,5 @@ public class Room {
     public String pkRoomId;
     public String roomTitle;
     public String roomDesc;
-    public String roomStatus;
+    public Boolean roomStatus;
 }

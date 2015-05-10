@@ -17,12 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.User;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -129,6 +127,51 @@ public class DialogLogin extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        TextView tv_confirmation=(TextView)getView().findViewById(R.id.tv_confirmation);
+        tv_confirmation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userName=((EditText)getView().findViewById(R.id.tv_username)).getText().toString();
+                String password=((EditText)getView().findViewById(R.id.tv_password)).getText().toString();
+                if (userName.equalsIgnoreCase("") || password.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity().getApplicationContext(),"Please enter user name and password to get your confirmation code.",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
+                User user=new User();
+
+                user.userName=userName;
+                user.userPass=password;
+
+
+                ((MyApplication) getActivity().getApplication()).getOzmoService().sendActCode(user,new Callback<Result>() {
+                    @Override
+                    public void success(Result result, Response response) {
+                            Fragment newFragment = new FragmentConfirmation();
+                            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, newFragment);
+                            transaction.addToBackStack("DialogLogin");
+                            // Commit the transaction
+                            transaction.commit();
+
+                        Toast.makeText(getActivity().getApplicationContext(),result.message,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getActivity().getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+            }
+        });
+
         Button btnLogin=(Button)getView().findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,44 +179,85 @@ public class DialogLogin extends DialogFragment {
                 final String userName=((EditText)getView().findViewById(R.id.tv_username)).getText().toString();
                 String password=((EditText)getView().findViewById(R.id.tv_password)).getText().toString();
 
+                final User user=new User();
+                user.userName=userName;
+                user.userPass=password;
 
-
-                ((MyApplication) getActivity().getApplication()).ozmoService().checkLogin(userName,password,new Callback<Result>() {
+                ((MyApplication) getActivity().getApplication()).getOzmoService().checkLogin(user,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
-                        if (result.title.equalsIgnoreCase("OK")){
+                        if (result.title.equalsIgnoreCase("OK")) {
 
-                            ((MyApplication) getActivity().getApplication()).ozmoService().getUserByUserName(userName,new Callback<User>() {
+
+                            ((MyApplication) getActivity().getApplication()).getOzmoService().uProfile(userName,new Callback<User>() {
                                 @Override
                                 public void success(User user, Response response) {
-                                    ((MyApplication) getActivity().getApplication()).user=user;
-                                    SharedPreferences prefs = getActivity().getSharedPreferences(
-                                            "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
+                                 // if (result.title.equalsIgnoreCase("OK")) {
+                                       // User user=(User)result.body;
+                                        ((MyApplication) getActivity().getApplication()).user = user;
+                                        SharedPreferences prefs = getActivity().getSharedPreferences(
+                                                "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
 
-                                    prefs.edit().putBoolean("loggedIn", true).apply();
-                                    prefs.edit().putString("userName", user.userName).apply();
-                                    Toast.makeText(getActivity().getApplicationContext(), "You are logged in successfully !", Toast.LENGTH_SHORT).show();
 
-                                    ((ActionBarActivity)getActivity()).getSupportActionBar().show();
+                                        prefs.edit().putBoolean("loggedIn", true).apply();
+                                        prefs.edit().putString("userName", user.userName).apply();
+                                        Toast.makeText(getActivity().getApplicationContext(), "You are logged in successfully !", Toast.LENGTH_SHORT).show();
 
-                                    Fragment newFragment = new FragmentFrontPage();
-                                    FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.fragment_container,newFragment);
-                                    transaction.addToBackStack("DialogLogin");
-                                    // Commit the transaction
-                                    transaction.commit();
+                                        ((ActionBarActivity) getActivity()).getSupportActionBar().show();
 
+                                        Fragment newFragment = new FragmentFrontPage();
+                                        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                                        transaction.replace(R.id.fragment_container, newFragment);
+                                        transaction.addToBackStack("DialogLogin");
+                                        // Commit the transaction
+                                        transaction.commit();
+//                                    }else{
+//                                        Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+//                                    }
                                 }
 
                                 @Override
                                 public void failure(RetrofitError error) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
 
+//
+//                            ((MyApplication) getActivity().getApplication()).getOzmoService().uProfile(user,new Callback<Result>() {
+//                                @Override
+//                                public void success(Result result, Response response) {
+//                                    if (result.title.equalsIgnoreCase("OK")) {
+//                                        User user=(User)result.body;
+//                                        ((MyApplication) getActivity().getApplication()).user = user;
+//                                        SharedPreferences prefs = getActivity().getSharedPreferences(
+//                                                "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
+//
+//                                        prefs.edit().putBoolean("loggedIn", true).apply();
+//                                        prefs.edit().putString("userName", user.userName).apply();
+//                                        Toast.makeText(getActivity().getApplicationContext(), "You are logged in successfully !", Toast.LENGTH_SHORT).show();
+//
+//                                        ((ActionBarActivity) getActivity()).getSupportActionBar().show();
+//
+//                                        Fragment newFragment = new FragmentFrontPage();
+//                                        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+//                                        transaction.replace(R.id.fragment_container, newFragment);
+//                                        transaction.addToBackStack("DialogLogin");
+//                                        // Commit the transaction
+//                                        transaction.commit();
+//                                    }else{
+//                                        Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void failure(RetrofitError error) {
+//                                    Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
 
-                        }else{
-                            Toast.makeText(getActivity().getApplicationContext(), "Wrong user name or password !", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -181,7 +265,7 @@ public class DialogLogin extends DialogFragment {
 
                     @Override
                     public void failure(RetrofitError error) {
-
+                        Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -7,23 +7,22 @@ import android.app.Fragment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Result;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -89,27 +88,31 @@ public class FragmentPostContent extends Fragment {
 
         final List<Post> myPostCards=new ArrayList<Post>();
 
-        ((MyApplication) getActivity().getApplication()).ozmoService().getPostContents(postId,new Callback<Post>() {
+        ((MyApplication) getActivity().getApplication()).getOzmoService().getPostContents(postId, new Callback<Result>() {
             @Override
-            public void success(Post post, Response response) {
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    Post post=(Post)result.body;
+                    myPostCards.add(post);
+                    for (int i=0;i<post.comments.size();i++){
+                        myPostCards.add(post.comments.get(i));
+                    }
 
+                    PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentPostContent.this.getFragmentManager());
+                    gridView = (StaggeredGridView)getView().findViewById(R.id.fragment_post_content_grid_view);
+                    gridView.setAdapter(pAdapter);
 
-                myPostCards.add(post);
-                for (int i=0;i<post.comments.size();i++){
-                    myPostCards.add(post.comments.get(i));
+                    ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
+                    progressWheel.setVisibility(View.GONE);
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
 
-                PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentPostContent.this.getFragmentManager());
-                gridView = (StaggeredGridView)getView().findViewById(R.id.fragment_post_content_grid_view);
-                gridView.setAdapter(pAdapter);
-
-                ProgressWheel progressWheel=(ProgressWheel)getActivity().findViewById(R.id.progress_wheel);
-                progressWheel.setVisibility(View.GONE);
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
             }
         });
 

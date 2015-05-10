@@ -6,29 +6,22 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
-import android.media.Image;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Post;
 import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.Vote;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -185,14 +178,14 @@ public class PostsAdapter extends BaseAdapter {
         RandomString randomString=new RandomString(30);
         myVote.pkVoteId=randomString.nextString();
 
-        ((MyApplication) mContext.getApplication()).ozmoService().createVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).getOzmoService().createVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
                     Toast.makeText(mContext.getApplicationContext(), "Your vote posted successfully !", Toast.LENGTH_SHORT).show();
                     refreshPage();
                 }else{
-                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -212,7 +205,7 @@ public class PostsAdapter extends BaseAdapter {
         RandomString randomString=new RandomString(30);
         myVote.pkVoteId=randomString.nextString();
 
-        ((MyApplication) mContext.getApplication()).ozmoService().createVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).getOzmoService().createVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -220,7 +213,7 @@ public class PostsAdapter extends BaseAdapter {
                     refreshPage();
 
                 }else{
-                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -237,7 +230,7 @@ public class PostsAdapter extends BaseAdapter {
         myVote.voteValue=true;
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        ((MyApplication) mContext.getApplication()).ozmoService().editVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).getOzmoService().editVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -245,7 +238,7 @@ public class PostsAdapter extends BaseAdapter {
                     refreshPage();
 
                 }else{
-                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -261,7 +254,7 @@ public class PostsAdapter extends BaseAdapter {
         myVote.voteValue=false;
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        ((MyApplication) mContext.getApplication()).ozmoService().editVote(myVote,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).getOzmoService().editVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -269,7 +262,7 @@ public class PostsAdapter extends BaseAdapter {
                     refreshPage();
 
                 }else{
-                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -284,7 +277,7 @@ public class PostsAdapter extends BaseAdapter {
 
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        ((MyApplication) mContext.getApplication()).ozmoService().removeVote(myVote.pkVoteId,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).getOzmoService().removeVote(myVote.pkVoteId,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
@@ -292,7 +285,7 @@ public class PostsAdapter extends BaseAdapter {
                     refreshPage();
 
                 }else{
-                    Toast.makeText(mContext.getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext.getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
             }
 

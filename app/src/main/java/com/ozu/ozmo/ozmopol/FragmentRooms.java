@@ -5,23 +5,21 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
-import com.ozu.ozmo.ozmopol.Models.Post;
+import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -83,23 +81,37 @@ public class FragmentRooms extends Fragment {
 
 
 
-        ((MyApplication) getActivity().getApplication()).ozmoService().getRooms(new Callback<List<Room>>() {
+        ((MyApplication) getActivity().getApplication()).getOzmoService().getRooms(new Callback<Result>() {
             @Override
-            public void success(List<Room> rooms, Response response) {
-                myCards.addAll(rooms);
-                RoomsAdapter pAdapter = new RoomsAdapter(getActivity(), myCards, getFragmentManager());
+            public void success(Result result, Response response) {
+                if (result.title.equalsIgnoreCase("OK")){
+                    List<Room> rooms=(List<Room>)result.body;
+                    myCards.addAll(rooms);
+                    RoomsAdapter pAdapter = new RoomsAdapter(getActivity(), myCards, getFragmentManager());
 
-                gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
-                gridView.setAdapter(pAdapter);
-                updateColumnCountForRooms();
+                    gridView = (StaggeredGridView)getView().findViewById(R.id.grid_view);
+                    gridView.setAdapter(pAdapter);
+                    updateColumnCountForRooms();
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+                Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+        Button btn_create_room=(Button)getView().findViewById(R.id.btn_create_room);
+        btn_create_room.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

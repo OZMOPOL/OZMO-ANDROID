@@ -36,14 +36,23 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif"
         android:hint="Password"/>
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:textColor="@color/whiteColor"
-        android:background="@color/line_color"
-        android:text="Login"/>
 
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/whiteColor"
+            android:background="@color/line_color"
+            android:text="Login"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/line_color"
+        android:padding="10dp"
+        android:text="Need Confirmation Code? "
+        android:id="@+id/tv_confirmation" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

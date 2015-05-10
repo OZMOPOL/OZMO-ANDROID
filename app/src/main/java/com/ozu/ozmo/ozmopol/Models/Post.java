@@ -15,6 +15,7 @@ public class Post {
     public String postTitle;
     public String postCDate;
     public String postEDate;
+    public String postStatus;
 
     public Post fkPostPrntId;
     public Room fkPostRoomId;

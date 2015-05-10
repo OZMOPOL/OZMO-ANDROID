@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.ozu.ozmo.ozmopol.Models.NewRes;
 import com.ozu.ozmo.ozmopol.Models.OzmoService;
 import com.ozu.ozmo.ozmopol.Models.Result;
+import com.ozu.ozmo.ozmopol.Models.Room;
 import com.ozu.ozmo.ozmopol.Models.User;
 
-import java.util.UUID;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -38,9 +39,9 @@ public class DialogSignup extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    LinearLayout form_layout,confirmation_layout;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    User new_user;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -130,16 +131,9 @@ public class DialogSignup extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        form_layout=(LinearLayout)getView().findViewById(R.id.form_layout);
-        confirmation_layout=(LinearLayout)getView().findViewById(R.id.confrimation_layout);
 
-        Button btn_confirm=(Button)getView().findViewById(R.id.btn_confirm);
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // CALL SERVICE TO CHECK IF THE CODE IS OK ! AND THEN GO TO LOGIN PAGE
-            }
-        });
+
+
 
         final Button btnSignup=(Button)getView().findViewById(R.id.btn_signup);
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -157,41 +151,46 @@ public class DialogSignup extends Fragment {
                     return;
                 }
 
-                User user=new User();
+                new_user =new User();
 
                 RandomString randomString=new RandomString(30);
-                user.pkUserId= randomString.nextString();
-                user.userName=userName;
-                user.userPass=userPassword;
-                user.userEmail=userEmail;
-                user.userStatus="1";
+               // new_user.pkUserId= randomString.nextString();
+                new_user.userName=userName;
+                new_user.userPass=userPassword;
+                new_user.userEmail=userEmail;
+
+                new_user.useractHash="";
 
 
-                ((MyApplication) getActivity().getApplication()).ozmoService().signUp(user,new Callback<Result>() {
+
+
+
+                ((MyApplication)getActivity().getApplication()).getOzmoService().signUp(new_user, new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
-                        if (result.title.equalsIgnoreCase("OK")){
-                            Toast.makeText(getActivity().getApplicationContext(), result.details, Toast.LENGTH_SHORT).show();
+                        if (result.title.equalsIgnoreCase("OK")) {
+                            Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
 
-                            form_layout.setVisibility(View.GONE);
-                            confirmation_layout.setVisibility(View.VISIBLE);
-//                            Fragment newFragment = new DialogLogin();
-//                            FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
-//                            transaction.replace(R.id.fragment_container,newFragment);
-//                            transaction.addToBackStack("DialogSignup");
-//                            // Commit the transaction
-//                            transaction.commit();
+                            ((MyApplication) getActivity().getApplication()).user = new_user;
+                            Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
 
 
-                        }else{
-                            Toast.makeText(getActivity().getApplicationContext(),result.details, Toast.LENGTH_LONG).show();
+                            Fragment newFragment = new FragmentConfirmation();
+                            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, newFragment);
+                            transaction.addToBackStack("DialogSignup");
+                            // Commit the transaction
+                            transaction.commit();
+
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_LONG).show();
                             btnSignup.setEnabled(true);
                         }
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-
+                        Toast.makeText(getActivity().getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
 

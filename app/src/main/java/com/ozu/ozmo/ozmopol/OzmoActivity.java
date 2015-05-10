@@ -3,11 +3,9 @@
 
 package com.ozu.ozmo.ozmopol;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -22,7 +20,6 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
@@ -30,26 +27,21 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.SwitchDrawerItem;
-import com.mikepenz.materialdrawer.model.ToggleDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.octicons_typeface_library.Octicons;
-import com.ozu.ozmo.ozmopol.Models.OzmoService;
-import com.ozu.ozmo.ozmopol.Models.Room;
+import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.User;
 
 import retrofit.Callback;
-import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
 public class OzmoActivity extends ActionBarActivity implements FragmentPostContent.OnFragmentInteractionListener,
-        CreatePostFragment.OnFragmentInteractionListener,DialogLogin.OnFragmentInteractionListener,DialogSignup.OnFragmentInteractionListener {
+        CreatePostFragment.OnFragmentInteractionListener,DialogLogin.OnFragmentInteractionListener,DialogSignup.OnFragmentInteractionListener,
+           FragmentConfirmation.OnFragmentInteractionListener {
     public int selectedRoomIndex=0;
     private static final int PROFILE_SETTING = 1;
     Bundle savedInstanceState;
@@ -75,23 +67,31 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
 
         SharedPreferences prefs = this.getSharedPreferences(
                 "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
+        prefs.edit().clear().commit();
 
         boolean loggedIn= prefs.getBoolean("loggedIn",false);
         if (loggedIn){
 
 
             String userName=prefs.getString("userName","");
-            ((MyApplication) getApplication()).ozmoService().getUserByUserName(userName,new Callback<User>() {
+            User user=new User();
+            user.userName=userName;
+
+            ((MyApplication) getApplication()).getOzmoService().uProfile(userName,new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
-                    // Logged in
-                    ((MyApplication) getApplication()).user=user;
-                    showFrontPage();
+                  //  if (result.title.equalsIgnoreCase("OK")){
+                       // User user=(User)result.body;
+                        ((MyApplication) getApplication()).user=user;
+                        showFrontPage();
+//                    }else{
+//                        Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+//                    }
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Toast.makeText(getApplicationContext(), "An error occured during process !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -111,7 +111,7 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
     }
     public void showDrawer(){
         // Create a few sample profile
-        // NOTE you have to define the loader logic too. See the CustomApplication for more details
+        // NOTE you have to define the loader logic too. See the CustomApplication for more message
         final IProfile profile = new ProfileDrawerItem().withName("Amin Dorostanian").withEmail("amin.dorost@gmail.com");
 
         // Create the AccountHeader

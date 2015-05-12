@@ -18,6 +18,29 @@ public class MyApplication extends Application {
     public User userProfile;
     public Room selectedRoom;
     public String selectedPostId;
+    public OzmoService ozmoService;
+
+    public OzmoService ozmoService(){
+        OzmoService service;
+        if (ozmoService == null) {
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(OzmoService.base_url).build();
+            ozmoService = restAdapter.create(OzmoService.class);
+        } else {
+
+        }
+        return ozmoService;
+
+    }
+
+    /*
+
+    THE OLD STATE OF THE CLASS IS AS IT CAN BE SEEN BELOW. SEE ISSUE #15.
+
+    public class MyApplication extends Application {
+
+    public User user;
+    public Room selectedRoom;
+    public String selectedPostId;
     private OzmoService ozmoService;
 
     public Post selectedPost;
@@ -36,4 +59,6 @@ public class MyApplication extends Application {
         return service;
 
     }
+}
+     */
 }

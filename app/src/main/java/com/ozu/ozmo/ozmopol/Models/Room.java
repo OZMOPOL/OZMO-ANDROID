@@ -9,4 +9,5 @@ public class Room {
     public String roomTitle;
     public String roomDesc;
     public Boolean roomStatus;
+    public Boolean follows;
 }

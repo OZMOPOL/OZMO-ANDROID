@@ -141,7 +141,7 @@ public class DialogLogin extends DialogFragment {
 
 
 
-                User user=new User();
+                final User user=new User();
 
                 user.userName=userName;
                 user.userPass=password;
@@ -150,14 +150,21 @@ public class DialogLogin extends DialogFragment {
                 ((MyApplication) getActivity().getApplication()).getOzmoService().sendActCode(user,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
+
+                        if (result.title.equalsIgnoreCase("OK")) {
+
+                            ((MyApplication)getActivity().getApplication()).user = user;
+
                             Fragment newFragment = new FragmentConfirmation();
                             FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
                             transaction.replace(R.id.fragment_container, newFragment);
                             transaction.addToBackStack("DialogLogin");
                             // Commit the transaction
                             transaction.commit();
-
-                        Toast.makeText(getActivity().getApplicationContext(),result.message,Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
 
                     @Override
@@ -188,39 +195,29 @@ public class DialogLogin extends DialogFragment {
                     public void success(Result result, Response response) {
                         if (result.title.equalsIgnoreCase("OK")) {
 
-
-                            ((MyApplication) getActivity().getApplication()).getOzmoService().uProfile(userName,new Callback<User>() {
-                                @Override
-                                public void success(User user, Response response) {
-                                 // if (result.title.equalsIgnoreCase("OK")) {
-                                       // User user=(User)result.body;
-                                        ((MyApplication) getActivity().getApplication()).user = user;
-                                        SharedPreferences prefs = getActivity().getSharedPreferences(
-                                                "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
+                            User newUser= result.user;
+                            ((MyApplication) getActivity().getApplication()).user = newUser;
+                            SharedPreferences prefs = getActivity().getSharedPreferences(
+                                    "com.ozu.ozmo.ozmopol", Context.MODE_PRIVATE);
 
 
-                                        prefs.edit().putBoolean("loggedIn", true).apply();
-                                        prefs.edit().putString("userName", user.userName).apply();
-                                        Toast.makeText(getActivity().getApplicationContext(), "You are logged in successfully !", Toast.LENGTH_SHORT).show();
+                            prefs.edit().putBoolean("loggedIn", true).apply();
+                            prefs.edit().putString("userName", newUser.userName).apply();
+                            Toast.makeText(getActivity().getApplicationContext(), "You are logged in successfully !",
+                                    Toast.LENGTH_SHORT).show();
 
-                                        ((ActionBarActivity) getActivity()).getSupportActionBar().show();
+                            ((ActionBarActivity) getActivity()).getSupportActionBar().show();
 
-                                        Fragment newFragment = new FragmentFrontPage();
-                                        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
-                                        transaction.replace(R.id.fragment_container, newFragment);
-                                        transaction.addToBackStack("DialogLogin");
-                                        // Commit the transaction
-                                        transaction.commit();
-//                                    }else{
-//                                        Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
-//                                    }
-                                }
+                            Fragment newFragment = new FragmentFrontPage();
+                            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container, newFragment);
+                            transaction.addToBackStack("DialogLogin");
+                            // Commit the transaction
+                            transaction.commit();
 
-                                @Override
-                                public void failure(RetrofitError error) {
 
-                                }
-                            });
+
+
 
 //
 //                            ((MyApplication) getActivity().getApplication()).getOzmoService().uProfile(user,new Callback<Result>() {

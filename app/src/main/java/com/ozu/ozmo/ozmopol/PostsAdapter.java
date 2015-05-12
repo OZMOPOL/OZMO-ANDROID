@@ -95,6 +95,26 @@ public class PostsAdapter extends BaseAdapter {
             vh.room.setText(post.fkPostRoomId.roomTitle);
 
 
+
+
+            vh.postUserName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((MyApplication) mContext.getApplication()).userProfile = post.fkPostUserId;
+                    // Create new fragment and transaction
+                    Fragment newFragment = new FragmentUserProfile();
+                    FragmentTransaction transaction =mContext.getFragmentManager().beginTransaction();
+
+                    // Replace whatever is in the fragment_container view with this fragment,
+                    // and add the transaction to the back stack
+                    transaction.replace(R.id.fragment_container, newFragment);
+                    transaction.addToBackStack("FragmentFrontPage");
+
+                    // Commit the transaction
+                    transaction.commit();
+                }
+            });
+
             final Vote vote = post.vote;
             if(vote!=null){
                 if (vote.voteValue){
@@ -140,6 +160,7 @@ public class PostsAdapter extends BaseAdapter {
                         return;
                    ((MyApplication) mContext.getApplication()).selectedPostId=mList.get(position).pkPostId;
 
+                    ((MyApplication) mContext.getApplication()).selectedPost = mList.get(position);
                     // Create new fragment and transaction
                     Fragment newFragment = new FragmentPostContent();
                     FragmentTransaction transaction =mContext.getFragmentManager().beginTransaction();
@@ -191,7 +212,7 @@ public class PostsAdapter extends BaseAdapter {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(mContext.getApplicationContext(), error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext.getApplicationContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -277,7 +298,7 @@ public class PostsAdapter extends BaseAdapter {
 
         myVote.fkVoteUserId=((MyApplication)mContext.getApplication()).user;
 
-        ((MyApplication) mContext.getApplication()).getOzmoService().removeVote(myVote.pkVoteId,new Callback<Result>() {
+        ((MyApplication) mContext.getApplication()).getOzmoService().removeVote(myVote,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){

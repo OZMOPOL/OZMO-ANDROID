@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.Room;
 
+import java.util.Random;
+
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -121,7 +123,7 @@ public class FragmentCreateRoom extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btn_create_room=(Button)getView().findViewById(R.id.btn_create_room);
+        Button btn_create_room=(Button)getView().findViewById(R.id.submit_room);
         btn_create_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,8 +133,11 @@ public class FragmentCreateRoom extends Fragment {
                 room.roomTitle=((EditText)getView().findViewById(R.id.fragment_create_room_title)).getText().toString();
                 room.roomDesc=((EditText)getView().findViewById(R.id.fragment_create_room_desc)).getText().toString();
 
+                RandomString rnd=new RandomString(30);
+                room.pkRoomId=rnd.nextString();
 
-                ((MyApplication)getActivity().getApplication()).getOzmoService().createRoom(room,new Callback<Result>() {
+
+                        ((MyApplication) getActivity().getApplication()).getOzmoService().createRoom(room,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
 

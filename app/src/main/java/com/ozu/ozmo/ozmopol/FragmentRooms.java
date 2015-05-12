@@ -1,5 +1,6 @@
 package com.ozu.ozmo.ozmopol;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.etsy.android.grid.StaggeredGridView;
 import com.ozu.ozmo.ozmopol.Models.Result;
 import com.ozu.ozmo.ozmopol.Models.Room;
+import com.ozu.ozmo.ozmopol.Models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,12 +82,12 @@ public class FragmentRooms extends Fragment {
         final List<Room> myCards = new ArrayList<Room>();
 
 
-
-        ((MyApplication) getActivity().getApplication()).getOzmoService().getRooms(new Callback<Result>() {
+        User user= ((MyApplication) getActivity().getApplication()).user;
+        ((MyApplication) getActivity().getApplication()).getOzmoService().getRoomList(user,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
-                    List<Room> rooms=(List<Room>)result.body;
+                    List<Room> rooms=result.rooms;
                     myCards.addAll(rooms);
                     RoomsAdapter pAdapter = new RoomsAdapter(getActivity(), myCards, getFragmentManager());
 
@@ -95,20 +97,31 @@ public class FragmentRooms extends Fragment {
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
-
             }
         });
+
+
 
         Button btn_create_room=(Button)getView().findViewById(R.id.btn_create_room);
         btn_create_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Create new fragment and transaction
+                Fragment newFragment = new FragmentCreateRoom();
+                FragmentTransaction transaction =getFragmentManager().beginTransaction();
+
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack
+                transaction.replace(R.id.fragment_container, newFragment);
+                transaction.addToBackStack("FragmentRooms");
+
+                // Commit the transaction
+                transaction.commit();
 
             }
         });

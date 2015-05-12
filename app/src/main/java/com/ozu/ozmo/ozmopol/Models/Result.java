@@ -13,4 +13,5 @@ public class Result {
     public List<Post> posts;
     public List<Room> rooms;
     public List<User> users;
+    public User user;
 }

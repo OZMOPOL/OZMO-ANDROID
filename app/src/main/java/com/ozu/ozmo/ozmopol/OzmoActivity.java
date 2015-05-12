@@ -41,7 +41,8 @@ import retrofit.client.Response;
 
 public class OzmoActivity extends ActionBarActivity implements FragmentPostContent.OnFragmentInteractionListener,
         CreatePostFragment.OnFragmentInteractionListener,DialogLogin.OnFragmentInteractionListener,DialogSignup.OnFragmentInteractionListener,
-           FragmentConfirmation.OnFragmentInteractionListener {
+           FragmentConfirmation.OnFragmentInteractionListener,FragmentCreateRoom.OnFragmentInteractionListener,
+            FragmentUserProfile.OnFragmentInteractionListener{
     public int selectedRoomIndex=0;
     private static final int PROFILE_SETTING = 1;
     Bundle savedInstanceState;
@@ -70,37 +71,37 @@ public class OzmoActivity extends ActionBarActivity implements FragmentPostConte
         prefs.edit().clear().commit();
 
         boolean loggedIn= prefs.getBoolean("loggedIn",false);
-        if (loggedIn){
-
-
-            String userName=prefs.getString("userName","");
-            User user=new User();
-            user.userName=userName;
-
-            ((MyApplication) getApplication()).getOzmoService().uProfile(userName,new Callback<User>() {
-                @Override
-                public void success(User user, Response response) {
-                  //  if (result.title.equalsIgnoreCase("OK")){
-                       // User user=(User)result.body;
-                        ((MyApplication) getApplication()).user=user;
-                        showFrontPage();
-//                    }else{
-//                        Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
-//                    }
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
-
-        }else{
+//        if (loggedIn){
+//
+//
+//            String userName=prefs.getString("userName","");
+//            User user=new User();
+//            user.userName=userName;
+//
+//            ((MyApplication) getApplication()).getOzmoService().uProfile(userName,new Callback<User>() {
+//                @Override
+//                public void success(User user, Response response) {
+//                   // if (response.ti.equalsIgnoreCase("OK")){
+//                 //       User user=(User)result.body;
+//                        ((MyApplication) getApplication()).user=user;
+//                        showFrontPage();
+////                    }else{
+////                        Toast.makeText(getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+////                    }
+//                }
+//
+//                @Override
+//                public void failure(RetrofitError error) {
+//                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//
+//
+//
+//        }else{
             getSupportActionBar().hide();
             showLoginDialog();
-        }
+        //}
 
 
 

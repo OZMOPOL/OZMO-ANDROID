@@ -67,11 +67,19 @@ public class FragmentRoomContent extends Fragment {
         final List<Post> myPostCards=new ArrayList<Post>();
 
 
-        ((MyApplication) getActivity().getApplication()).getOzmoService().getRoomContents(room.pkRoomId, user.pkUserId, new Callback<Result>() {
+        Result res=new Result();
+        res.users=new ArrayList<>();
+        res.rooms=new ArrayList<>();
+        res.users.add(user);
+        res.rooms.add(room);
+
+        ((MyApplication) getActivity().getApplication()).getOzmoService().getRoomDetail(res,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
-                    List<Post> posts= (List<Post>)result.body;
+
+
+                    List<Post> posts= result.posts;
                     myPostCards.addAll(posts);
                     PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentRoomContent.this.getFragmentManager());
                     gridView = (StaggeredGridView)getView().findViewById(R.id.room_content_grid_view);
@@ -86,15 +94,17 @@ public class FragmentRoomContent extends Fragment {
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
+
 
 
     }

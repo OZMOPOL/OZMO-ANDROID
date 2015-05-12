@@ -17,53 +17,57 @@ import retrofit.http.Path;
  */
 
 public interface OzmoService {
-    public static final String base_url="http://10.100.92.28:8080";
-    static final String details_url="/ozmoPol_WS_GF3/resources";
+    public static final String base_url="http://10.100.92.26:8080/";
+    static final String details_url="/ozmoPolWS/webresources";
 
-    static final String post_url="/com.ozmo.ent.ozpost";
-    static final String vote_url="/com.ozmo.ent.ozvote";
-    static final String room_url="/com.ozmo.ent.ozroom";
-    static final String user_url="/com.ozmo.ent.ozuser";
+    static final String post_url="/com.ozmopol.ozpost";
+    static final String vote_url="/com.ozmopol.ozvote";
+    static final String room_url="/com.ozmopol.ozroom";
+    static final String user_url="/com.ozmopol.ozuser";
 
     // Posts
     @POST(details_url + user_url + "/uList")
     void testSrv(Callback<Result> cb);
 
 
-    @POST(details_url + post_url + "/getFrontPage")
+    @POST(details_url + user_url + "/getFrontPage")
     void getFrontPagePosts(@Body User user, Callback<Result> cb);
 
-    @GET(details_url+ post_url +"/getRoomContents/{id}/user/{userId}")
-    void getRoomContents(@Path("id") String roomId,@Path("userId") String userId,Callback<Result> cb);
+    @POST(details_url+ user_url +"/getRoomDetails")
+    void getRoomDetail(@Body Result res, Callback<Result> cb);
 
 
-    @GET(details_url+ post_url +"getPostContents/{id}")
-    void getPostContents(@Path("id") String postId,Callback<Result> cb);
+    @POST(details_url+ user_url +"/getPostDetails")
+    void getPostDetails(@Body Result req, Callback<Result> cb);
 
 
     @POST(details_url+ post_url +"/createPost")
     void createPost(@Body Post post, Callback<Result> cb);
 
 
+    @POST(details_url+ user_url +"/getUserProfile")
+    void getUserProfile(@Body User user, Callback<Result> cb);
+
+
     // Votes
-    @POST(details_url + vote_url +"/createVote")
+    @POST(details_url + vote_url + "/createVote")
     void createVote(@Body Vote vote, Callback<Result> cb);
 
-    @PUT(details_url + vote_url + "/editVote")
+    @POST(details_url + vote_url + "/editVote")
     void editVote(@Body Vote vote, Callback<Result> cb);
 
-    @DELETE(details_url+ vote_url + "{id}")
-    void removeVote(@Path("id") String id, Callback<Result> cb);
+    @POST(details_url+ vote_url  + "/deleteVote")
+    void removeVote(@Body Vote vote, Callback<Result> cb);
 
     //Users
 
-    @POST(details_url + user_url + "/signUpVal")
+    @POST(details_url + user_url + "/signUp")
     void signUp(@Body User user, Callback<Result> cb);
 
-    @POST(details_url + user_url + "/verifyUser")
+    @POST(details_url + user_url + "/activateUser")
     void verifyUser(@Body User user, Callback<Result> cb);
 
-    @POST(details_url+ user_url +"/checkLogin")
+    @POST(details_url+ user_url +"/logIn")
     void checkLogin(@Body User user, Callback<Result> cb);
 
     @GET(details_url+ user_url +"/getUserByUserName/{userName}")
@@ -75,14 +79,19 @@ public interface OzmoService {
 
     //Rooms
 
+    @POST(details_url+ user_url +"/getRoomList")
+    void getRoomList(@Body User user,Callback<Result> cb);
+
     @POST(details_url+ room_url + "/createRoom" )
     void createRoom(@Body Room room, Callback<Result> cb);
 
 
-    @GET(details_url+ room_url )
-    void getRooms(Callback<Result> cb);
+
+    @POST(details_url+ "/com.ozmopol.xuserflwroom" + "/followRoom" )
+    void followRoom(@Body Xuserflwroom req, Callback<Result> cb);
 
 
-
+    @POST(details_url+ "/com.ozmopol.xuserflwroom" + "/unfollowRoom" )
+    void unfollowRoom(@Body Xuserflwroom req, Callback<Result> cb);
 
 }

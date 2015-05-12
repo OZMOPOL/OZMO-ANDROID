@@ -1,6 +1,7 @@
 package com.ozu.ozmo.ozmopol;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,11 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.ozu.ozmo.ozmopol.Models.Post;
 import com.ozu.ozmo.ozmopol.Models.Result;
+import com.ozu.ozmo.ozmopol.Models.Room;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
@@ -81,21 +85,80 @@ public class FragmentPostContent extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String postId=((MyApplication) getActivity().getApplication()).selectedPostId;
+        final String postId=((MyApplication) getActivity().getApplication()).selectedPostId;
 
         swipeLayout = (SwipeRefreshLayout)view.findViewById(R.id.fragment_post_content_swipe_container);
         addSwipeRefreshFunction();
 
+
+
+        Button btn_create_comment=(Button)getView().findViewById(R.id.btn_create_comment);
+        btn_create_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String comment_str=((EditText)getView().findViewById(R.id.comment_title)).getText().toString();
+                Post p=new Post();
+                Post parent=new Post();
+                parent.pkPostId=postId;
+                p.fkPostPrntId=parent;
+                RandomString rnd=new RandomString(30);
+
+                p.fkPostUserId= ((MyApplication) getActivity().getApplication()).user;
+
+                p.fkPostRoomId= new Room();
+                p.fkPostRoomId.pkRoomId=((MyApplication) getActivity().getApplication()).selectedPost.fkPostRoomId.pkRoomId;
+                p.pkPostId=rnd.nextString();
+                p.postContent=comment_str;
+                p.postEDate="2015-03-28T20:04:05+02:00";
+                p.postCDate="2015-03-28T20:04:05+02:00";
+
+                ((MyApplication) getActivity().getApplication()).getOzmoService().createPost(p,new Callback<Result>() {
+                    @Override
+                    public void success(Result result, Response response) {
+                        if (result.title.equalsIgnoreCase("OK")){
+
+                            Fragment newFragment = new FragmentPostContent();
+                            FragmentTransaction transaction =getActivity().getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragment_container,newFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        }
+                        Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getActivity().getApplicationContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+            }
+        });
+
+
         final List<Post> myPostCards=new ArrayList<Post>();
 
-        ((MyApplication) getActivity().getApplication()).getOzmoService().getPostContents(postId, new Callback<Result>() {
+
+        Result req=new Result();
+        req.users=new ArrayList<>();
+        req.posts= new ArrayList<>();
+
+        req.users.add(((MyApplication) getActivity().getApplication()).user);
+        Post p=new Post();
+        p.pkPostId=postId;
+        req.posts.add(p);
+
+
+        ((MyApplication) getActivity().getApplication()).getOzmoService().getPostDetails(req,new Callback<Result>() {
             @Override
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
-                    Post post=(Post)result.body;
-                    myPostCards.add(post);
-                    for (int i=0;i<post.comments.size();i++){
-                        myPostCards.add(post.comments.get(i));
+
+                    for (Post pp : result.posts){
+                        myPostCards.add(pp);
                     }
 
                     PostsAdapter pAdapter=new PostsAdapter(getActivity(),myPostCards, FragmentPostContent.this.getFragmentManager());
@@ -107,15 +170,13 @@ public class FragmentPostContent extends Fragment {
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
     @Override

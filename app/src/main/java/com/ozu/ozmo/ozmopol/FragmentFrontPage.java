@@ -67,13 +67,7 @@ public class FragmentFrontPage extends Fragment {
             public void success(Result result, Response response) {
                 if (result.title.equalsIgnoreCase("OK")){
 
-                    List<Post> posts=(List<Post>)result.body;
-
-                   for (int i=0;i<posts.size();i++){
-                       Post p=(Post) posts.get(i);
-                       posts.add(p);
-                   }
-
+                    List<Post> posts=result.posts;
                     myPostCards.addAll(posts);
                     PostsAdapter pAdapter = new PostsAdapter(getActivity(), myPostCards, FragmentFrontPage.this.getFragmentManager());
                     gridView = (StaggeredGridView) getView().findViewById(R.id.grid_view);
@@ -89,7 +83,7 @@ public class FragmentFrontPage extends Fragment {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "Oops ! An error occured !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(),error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

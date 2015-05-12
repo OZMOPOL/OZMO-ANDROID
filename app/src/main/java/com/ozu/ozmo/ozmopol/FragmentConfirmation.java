@@ -128,30 +128,46 @@ public class FragmentConfirmation extends Fragment {
 
                 User user= ((MyApplication)getActivity().getApplication()).user;
                 user.useractHash=((EditText)getView().findViewById(R.id.confirmation_code)).getText().toString();
-                ((MyApplication)getActivity().getApplication()).getOzmoService().verifyUser(user, new Callback<Result>() {
+
+                ((MyApplication)getActivity().getApplication()).getOzmoService().getUserProfile(user,new Callback<Result>() {
                     @Override
                     public void success(Result result, Response response) {
-                        if (result.title.equalsIgnoreCase("OK")) {
-                            Fragment newFragment = new DialogLogin();
-                            FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.fragment_container, newFragment);
-                            transaction.addToBackStack("DialogConfirmation");
-                            // Commit the transaction
-                            transaction.commit();
+                        if (result.title.equalsIgnoreCase("OK")){
+                            User newUser=result.users.get(0);
+                            newUser.useractHash=((EditText)getView().findViewById(R.id.confirmation_code)).getText().toString();
+                            ((MyApplication)getActivity().getApplication()).getOzmoService().verifyUser(newUser, new Callback<Result>() {
+                                @Override
+                                public void success(Result result, Response response) {
+                                    if (result.title.equalsIgnoreCase("OK")) {
+                                        Fragment newFragment = new DialogLogin();
+                                        FragmentTransaction transaction = getActivity().getFragmentManager().beginTransaction();
+                                        transaction.replace(R.id.fragment_container, newFragment);
+                                        transaction.addToBackStack("DialogConfirmation");
+                                        // Commit the transaction
+                                        transaction.commit();
+                                    } else {
+                                    }
 
-                        } else {
+                                    Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
 
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Toast.makeText(getActivity().getApplicationContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
-
-                        Toast.makeText(getActivity().getApplicationContext(), result.message, Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        Toast.makeText(getActivity().getApplicationContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
+
+
+
             }
         });
     }
